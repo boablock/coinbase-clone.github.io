@@ -4,7 +4,7 @@
 
 /*** PASOS DEL CONVERSOR
  * 1)Bienvenida y datos de usuario (funcion login) 
- * 2)Ingresar moneda (USD/ARS) (funcion converet)
+ * 2)Ingresar moneda (USD/ARS) (funcion converter)
  * 3)Ingresar criptomoneda a convertir
  * 4)Ingresar monto en USD/ARS
  * 5)Devolver resultado
@@ -23,7 +23,7 @@
      return userAndPass;
  }
  login();
- // userAndPass = login(); // pregunta: si declaro userAndPass dentro de la funcion, y en el ambito global le asigno el valor d ela funcion, no me dice que no existe. 
+ // userAndPass = login(); // pregunta: si declaro userAndPass dentro de la funcion, y en el ambito global le asigno el valor de la funcion, no me dice que no existe. Porque?
  console.log(userAndPass);
 
  
@@ -44,7 +44,7 @@
          a = parseInt (prompt('Ingrese un numero segun la criptomoneda deseada: \n1)BTC \n2)ETH'));
          monto = parseFloat( prompt('Ingrese el monto que desee convertir'));
 
-     } while ((de != 1 && de != 2) || (a !=1 && a != 2)); //--> pobrar con isNaN (para que repira el ciclo si monto no es numero)
+     } while ((de != 1 && de != 2) || (a !=1 && a != 2)); //--> ¿Como hacer para que continue el ciclo cuando se ingresa un montor = NaN? (que no sea un numero)
 
      if ( de === 1 && a === 1){
          return ('$' + monto + ' = '+ monto / precioBtc + 'BTC');
