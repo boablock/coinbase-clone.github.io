@@ -22,8 +22,7 @@
      userAndPass = user + passWord
      return userAndPass;
  }
- login();
- // userAndPass = login(); // pregunta: si declaro userAndPass dentro de la funcion, y en el ambito global le asigno el valor de la funcion, no me dice que no existe. Porque?
+ userAndPass = login();
  console.log(userAndPass);
 
  
