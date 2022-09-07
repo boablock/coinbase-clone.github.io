@@ -1,6 +1,14 @@
     
     
     
+      let precioBtc = 20000;
+      let precioEth = 2000;
+      let dolar = 300;
+  
+      let moneda;
+      let crypto; 
+      let monto;
+
     let option;
     const datosUsuario =[
         {
@@ -13,7 +21,8 @@
     ]
 
     console.log(datosUsuario);
-   
+
+  
 
     while (option !== 4){
         option = Number(prompt('Ingrese una opcion:\n 1) Login/sing-up\n 2)Conversor crypto\n 3)Seccion favoritos\n 4) Salir'));
@@ -25,13 +34,16 @@
                 const passWord =prompt ('Ingresa tu contraseña')
                 // const id = getLastID() + 1;
                 newUser(nombre, mail, userName, passWord);
+                alert('Bienvenido' + nombre + 'tu mail registrado es: ' + mail);
                 break;
             case 2:
                 moneda = parseInt(prompt('ingrese un numero segun sea su moneda: \n 1)USD 2)ARS'));
                 crypto = parseInt(prompt('Ingrese un numero segun la criptomoneda deseada: \n1)BTC \n2)ETH'));
-                monto = parseFloat(prompt('Ingrese el monto que desee convertir'));
+                monto = parseInt(prompt('Ingrese el monto que desee convertir'));
                 converter(moneda, crypto, monto);
+                document.write(monto * precioBtc);
                 break;
+
             case 3:
                 alert('Ingresaste la opcion 3');
                 break;
@@ -53,13 +65,12 @@
         })
     }
     
-    let precioBtc = 20000;
-    let precioEth = 2000;
-    let dolar = 300;
+   
 
-    let moneda;
-    let crypto; 
-    let monto;
+    const suma = (a,b) => a / b; 
+    alert(suma(monto),precioBtc); 
+
+
 
     function converter(moneda, crypto, monto){
         
