@@ -1,5 +1,5 @@
 
-
+// MODELO AFTER
     let option;
     const datosUsuario =[
         {
