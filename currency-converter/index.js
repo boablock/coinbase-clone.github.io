@@ -1,64 +1,140 @@
 
     // MODELO-AFTER
-    let option;
-    const datosUsuario =[
+    
+    // Array para recolectar los datos de cada usuario
+    const datosUsuarios =[
         {
-            // id:1,
+            id:1,
             nombre:'Pedro',
+            apellido: 'Perez',
             mail:'pedro_montero@gmail.com',
-            userName: 'Pepemonte1',
-            passWord: 'Pepe123',
+            usuario: 'Pepemonte1',
+            contraseña: 'Pepe123',
         }
     ]
 
-    console.log(datosUsuario);
+    datosUsuarios.filter(apellido => apellido.apellido === 'Perez');
+    console.log(datosUsuarios);
 
+    // Array para recolectar las conversiones de cada usuario
+    const conversionesUsuarios =[
+        {   
+            id:1, 
+            moneda: 1,
+            crypto:1,
+            monto: 10000, 
+        },
+        {
+            id:2,
+            moneda:2,
+            crypto:1,
+            monto: 100, 
+        }
+    ]
+    console.log(conversionesUsuarios);
+
+    const porfolio =[
+        {}
+    ]
+    console.log(porfolio);
+
+    const tusInversiones =[
+        {}
+    ]
+    console.log(tusInversiones);
+    
+    let option;
     let precioBtc = 20000;
     let precioEth = 2000;
     let dolar = 300;
-  
     let moneda;
     let crypto; 
     let monto;
 
-    while (option !== 4){
-        option = Number(prompt('Ingrese una opcion:\n 1) Login/sing-up\n 2)Conversor crypto\n 3)Seccion favoritos\n 4) Salir'));
+    while (option !== 5){
+        option = Number(prompt('Ingrese una opcion:\n 1) Login/sing-up\n 2)Conversor crypto\n 3)Tu porfolio\n 4) Tus inversiones \n5) Salir'));
         switch(option){
             case 1:
                 const nombre = prompt('Ingresa tu nombre');
                 const mail = prompt('Ingresa tu mail');
-                const userName = prompt('Ingresa tu usuario');
-                const passWord =prompt ('Ingresa tu contraseña')
-                // const id = getLastID() + 1;
-                newUser(nombre, mail, userName, passWord);
-                alert('Bienvenido ' + nombre);
+                const usuario = prompt('Ingresa tu usuario');
+                const contraseña =prompt ('Ingresa tu contraseña')
+                const id = getLastID() + 1;
+                // const id = datosUsuarios.length + 1; //--> se haria de esta forma, pero lo hicimos con una funcion para abstraer y encapsular un comportamiento e invocarlo aca. 
+                newUser(nombre, mail, usuario, contraseña, id);
+                alert('Bienvenido ' + nombre + 'ID: '+ id);
                 break;
             case 2:
                 moneda = parseInt(prompt('ingrese un numero segun sea su moneda: \n 1)USD 2)ARS'));
                 crypto = parseInt(prompt('Ingrese un numero segun la criptomoneda deseada: \n1)BTC \n2)ETH'));
                 monto = parseInt(prompt('Ingrese el monto que desee convertir'));
                 alert(converter(moneda, crypto, monto));
+                newConvertion(moneda, crypto, monto);
                 break;
             case 3:
-                alert('Ingresaste la opcion 3');
+                alert('Bienvenid@ a tu portfolio!');
+                tuCrypto = prompt('Ingresa la cryptomoneda que poseas para conformar tu porfolio:\n1) ETH\n2) BTC\n3) ADA');
+                cantidad = prompt('Ingresa la cantidad que posee de su cryptomoneda (en unidades)');
                 break;
             case 4:
-                alert('Ingresaste la opcion 4');
+                alert('Bienvenido a la seccion inversiones')
+                cryptoComprada = prompt('Ingrese la cyrptomoneda que a comprado: \n1) ETH\n2) BTC\n3) ADA');
+                cantidadComprada= parseFloat('Ingrese la cantidad comprada en unidades');
+                precioCompra = parseFloat( prompt('Ingrese el precio de compra'));
+                fechaCompra = prompt('ingrese la fecha de compra')
                 break;
+            case 5:
+                alert('Gracias por visitarnos!')
+                break; 
             default:
                 alert('La opcion ingresada no es correcta, intente nuevamente');
         }
     }
 
-    function newUser (nombre, mail, usuario, contraseña){
-        datosUsuario.push({
+    function getLastID(){
+        return datosUsuarios.length; //--> . length -> la cantidad de usuarios que tengo. 
+    }
+
+    function newUser (nombre, mail, usuario, contraseña, id){ //--> Se podrian haber puesto los promps aca adentro(testearlo en una nueva rama).
+        datosUsuarios.push({
             nombre,
             mail,
-            usuario,
+            usuario, 
             contraseña,
+            id,
+        })
+        return 'Usuario agregado correctamente ' + id; 
+    }
+
+    // function getAllUsers(){
+    //     datosUsuarios.forEach((dato)=> console.log(dato.nombre + '-' + dato.mail + '-' + dato.usuario + '-' + dato.contraseña + '-' + id)); //--> "dato" va a ser cada elemento de datosUsuarios en cada iteracion. 
+    // }
+    
+    function newConvertion (moneda, crypto, monto){
+        conversionesUsuarios.push({
+            moneda,
+            crypto,
+            monto
+        })
+        
+    }
+
+    function newPorfolio (tuCrypto, cantidad){
+        porfolio.push({
+            tuCrypto,
+            cantidad,
         })
     }
-    
+
+    function newInvertion (cryptoComprada, cantidadComprada, precioCompra, fechaCompra){
+        tusInversiones.push({
+            cryptoComprada,
+            cantidadComprada,
+            precioCompra,
+            fechaCompra,
+        })
+    }
+
 
     function converter(moneda, crypto, monto){
         if ( moneda === 1 && crypto === 1){
