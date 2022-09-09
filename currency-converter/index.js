@@ -10,11 +10,22 @@
             mail:'pedro_montero@gmail.com',
             usuario: 'Pepemonte1',
             contraseña: 'Pepe123',
+        },
+        {
+            id:2,
+            nombre:'Juan',
+            apellido: 'Gonzales',
+            mail:'juan_gonzales@gmail.com',
+            usuario: 'lalal23',
+            contraseña: 'lalal23',
         }
     ]
-
-    datosUsuarios.filter(apellido => apellido.apellido === 'Perez');
-    console.log(datosUsuarios);
+    // Metodo de filtrado array (apellido)
+    const busqueda = datosUsuarios.filter(dato =>{
+        return dato.apellido  === 'Gonzales';
+        }
+    )
+    console.log(busqueda);
 
     // Array para recolectar las conversiones de cada usuario
     const conversionesUsuarios =[
@@ -32,16 +43,23 @@
         }
     ]
     console.log(conversionesUsuarios);
-
+    // Array porfolio de los usuarios
     const porfolio =[
         {}
     ]
     console.log(porfolio);
-
+    //Array inversiones de usuarios
     const tusInversiones =[
         {}
     ]
     console.log(tusInversiones);
+
+    //Array cryptomonedas
+    const cryptomonedas =[
+        {
+
+        }
+    ]
     
     let option;
     let precioBtc = 20000;
@@ -50,7 +68,7 @@
     let moneda;
     let crypto; 
     let monto;
-
+    // Estrucura inicial, condicional base
     while (option !== 5){
         option = Number(prompt('Ingrese una opcion:\n 1) Login/sing-up\n 2)Conversor crypto\n 3)Tu porfolio\n 4) Tus inversiones \n5) Salir'));
         switch(option){
@@ -78,7 +96,7 @@
                 break;
             case 4:
                 alert('Bienvenido a la seccion inversiones')
-                cryptoComprada = prompt('Ingrese la cyrptomoneda que a comprado: \n1) ETH\n2) BTC\n3) ADA');
+                cryptoComprada = prompt('Ingrese la cyrptomoneda que a comprado: \n1) ETH\n2) BTC\n3) ADA \n4)BNB \n 5)USDT');
                 cantidadComprada= parseFloat('Ingrese la cantidad comprada en unidades');
                 precioCompra = parseFloat( prompt('Ingrese el precio de compra'));
                 fechaCompra = prompt('ingrese la fecha de compra')
@@ -135,15 +153,14 @@
         })
     }
 
-
     function converter(moneda, crypto, monto){
         if ( moneda === 1 && crypto === 1){
             return ('$' + monto + ' = '+ monto / precioBtc + 'BTC');
         }else if (moneda === 1 && crypto === 2){
             return ('$' + monto + ' = '+ monto / precioEth + 'ETH');
-        } else if (moneda  === 2 && monto === 1){
+        } else if (moneda  === 2 && crypto === 1){
             return ('$' + monto + ' = '+ monto / dolar / precioBtc + 'BTC');
-        }else if (moneda === 2 && monto === 2){
+        }else if (moneda === 2 && crypto === 2){
             return ('$' + monto + ' = '+ monto / dolar / precioEth + 'ETH');
         }
     }
@@ -154,11 +171,7 @@
     // const suma = (a,b) => a / b; 
     // alert(suma(monto),precioBtc); 
 
-    // function suma (a,b){
-    //     return a/b; 
-    // }
-
-    // console.log(suma(100,10));
+  
 
 
 
