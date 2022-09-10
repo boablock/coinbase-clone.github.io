@@ -43,11 +43,13 @@
         }
     ]
     console.log(conversionesUsuarios);
+
     // Array porfolio de los usuarios
     const porfolio =[
         {}
     ]
     console.log(porfolio);
+     
     //Array inversiones de usuarios
     const tusInversiones =[
         {}
@@ -99,7 +101,8 @@
                 cryptoComprada = prompt('Ingrese la cyrptomoneda que a comprado: \n1) ETH\n2) BTC\n3) ADA \n4)BNB \n 5)USDT');
                 cantidadComprada= parseFloat('Ingrese la cantidad comprada en unidades');
                 precioCompra = parseFloat( prompt('Ingrese el precio de compra'));
-                fechaCompra = prompt('ingrese la fecha de compra')
+                fechaCompra = prompt('ingrese la fecha de compra');
+                newInvertion
                 break;
             case 5:
                 alert('Gracias por visitarnos!')
@@ -144,7 +147,7 @@
         })
     }
 
-    function newInvertion (cryptoComprada, cantidadComprada, precioCompra, fechaCompra){
+    function newInvestment (cryptoComprada, cantidadComprada, precioCompra, fechaCompra){
         tusInversiones.push({
             cryptoComprada,
             cantidadComprada,
