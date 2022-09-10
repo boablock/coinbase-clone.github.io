@@ -43,13 +43,7 @@
         }
     ]
     console.log(conversionesUsuarios);
-
-    // Array porfolio de los usuarios
-    const porfolio =[
-        {}
-    ]
-    console.log(porfolio);
-     
+   
     //Array inversiones de usuarios
     const tusInversiones =[
         {}
@@ -71,8 +65,8 @@
     let crypto; 
     let monto;
     // Estrucura inicial, condicional base
-    while (option !== 5){
-        option = Number(prompt('Ingrese una opcion:\n 1) Login/sing-up\n 2)Conversor crypto\n 3)Tu porfolio\n 4) Tus inversiones \n5) Salir'));
+    while (option !== 4){
+        option = Number(prompt('Ingrese una opcion:\n 1) Login/sing-up\n 2)Conversor crypto\n 3) Tus inversiones \n4) Salir'));
         switch(option){
             case 1:
                 const nombre = prompt('Ingresa tu nombre');
@@ -89,22 +83,18 @@
                 crypto = parseInt(prompt('Ingrese un numero segun la criptomoneda deseada: \n1)BTC \n2)ETH'));
                 monto = parseInt(prompt('Ingrese el monto que desee convertir'));
                 alert(converter(moneda, crypto, monto));
-                newConvertion(moneda, crypto, monto);
+                newConversion(moneda, crypto, monto);
                 break;
+           
             case 3:
-                alert('Bienvenid@ a tu portfolio!');
-                tuCrypto = prompt('Ingresa la cryptomoneda que poseas para conformar tu porfolio:\n1) ETH\n2) BTC\n3) ADA');
-                cantidad = prompt('Ingresa la cantidad que posee de su cryptomoneda (en unidades)');
-                break;
-            case 4:
                 alert('Bienvenido a la seccion inversiones')
                 cryptoComprada = prompt('Ingrese la cyrptomoneda que a comprado: \n1) ETH\n2) BTC\n3) ADA \n4)BNB \n 5)USDT');
                 cantidadComprada= parseFloat('Ingrese la cantidad comprada en unidades');
                 precioCompra = parseFloat( prompt('Ingrese el precio de compra'));
                 fechaCompra = prompt('ingrese la fecha de compra');
-                newInvertion
+                newInvestment(cryptoComprada, cantidadComprada, precioCompra, fechaCompra);
                 break;
-            case 5:
+            case 4:
                 alert('Gracias por visitarnos!')
                 break; 
             default:
@@ -131,20 +121,13 @@
     //     datosUsuarios.forEach((dato)=> console.log(dato.nombre + '-' + dato.mail + '-' + dato.usuario + '-' + dato.contraseña + '-' + id)); //--> "dato" va a ser cada elemento de datosUsuarios en cada iteracion. 
     // }
     
-    function newConvertion (moneda, crypto, monto){
+    function newConversion (moneda, crypto, monto){
         conversionesUsuarios.push({
             moneda,
             crypto,
             monto
         })
         
-    }
-
-    function newPorfolio (tuCrypto, cantidad){
-        porfolio.push({
-            tuCrypto,
-            cantidad,
-        })
     }
 
     function newInvestment (cryptoComprada, cantidadComprada, precioCompra, fechaCompra){
