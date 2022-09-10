@@ -21,7 +21,7 @@
             contraseña: 'lalal23',
         }
     ]
-    console.log(datosUsuarios);
+    // console.log(datosUsuarios);
 
     // // Metodo de filtrado array (apellido)
     // const busqueda = datosUsuarios.filter(dato =>{
@@ -45,11 +45,21 @@
             monto: 100, 
         }
     ]
-    console.log(conversionesUsuarios);
+    // console.log(conversionesUsuarios);
    
     //Array inversiones de usuarios
-    const userInvestments =[
-        {}
+    let userInvestments =[
+        {
+            id:1,
+            cryptoComprada: 'BTC',
+            cantidadComprada: 0.01, 
+        },
+        {
+            id:2,
+            cryptoComprada:'ADA',
+            cantidadComprada: 100,
+        }
+        
     ]
     console.log(userInvestments);
 
@@ -65,7 +75,9 @@
         'ETH',
         'ADA',
         'BNB',
+        'USDT',
     ]
+    // console.log(cryptomonedas);
     
     let option;
     let precioBtc = 20000;
@@ -83,10 +95,10 @@
                 const mail = prompt('Ingresa tu mail');
                 const usuario = prompt('Ingresa tu usuario');
                 const contraseña =prompt ('Ingresa tu contraseña')
-                const creationId = getLastID() + 1;
+                const creationIdusers = getLastIdUsers() + 1;
                 // const id = datosUsuarios.length + 1; //--> se haria de esta forma, pero lo hicimos con una funcion para abstraer y encapsular un comportamiento e invocarlo aca. 
-                newUser(nombre, mail, usuario, contraseña, creationId);
-                alert('Bienvenido ' + nombre + 'ID: '+ id);
+                newUser(nombre, mail, usuario, contraseña, id);
+                alert('Bienvenido ' + nombre + 'ID: '+ creationIdusers);
                 break;
             case 2:
                 moneda = parseInt(prompt('ingrese un numero segun sea su moneda: \n 1)USD 2)ARS'));
@@ -98,15 +110,18 @@
            
             case 3:
                 alert('Bienvenido a la seccion inversiones')
-                opcionesInversiones = parseInt(prompt('ingrese la opcion que desee:\n1)Agregar inversion \n2)Ver inversiones\n3)Eliminar inversion'));
-                if (opcionesInversiones === 1){
-                cryptoComprada = prompt('Ingrese la cyrptomoneda que a comprado: \n1) BTC\n2) ETH\n3) ADA \n4)BNB \n 5)USDT');
+                optionInvestmentSection = parseInt(prompt('ingrese la opcion que desee:\n1)Agregar inversion \n2)Ver inversiones\n3)Eliminar inversion'));
+                if (optionInvestmentSection === 1){
+                cryptoComprada = prompt('Ingrese la cryptomoneda que a comprado: \n1) BTC\n2) ETH\n3) ADA \n4)BNB \n 5)USDT');
                 cantidadComprada= parseFloat(prompt('Ingrese la cantidad comprada en unidades'));
                 newInvestment(cryptoComprada, cantidadComprada);
-                }else if (opcionesInversiones === 2){
-                    alert(getAllInvestments);
-                }else if (opcionesInversiones === 3){
-
+                const creationIdInvestments = getLastIdInvestments() +1;
+                alert('Usted a agregado la siguiente inversion: \n ' + cryptoComprada  + ' - ' + cantidadComprada + ' ID: ' + creationIdInvestments);
+                }else if (optionInvestmentSection === 2){
+                    getAllInvestments(); // me tira undefined al final 
+                }else if (optionInvestmentSection === 3){
+                    let deleteID = Number(prompt('Ingrese el id de la inversion que quiera eliminar'));
+                    deleteInvestment(deleteID);
                 }
 
                 break;
@@ -118,8 +133,12 @@
         }
     }
     // funcion para obtener ID
-    function getLastID(){ //--> averiguar mas procesos para saber ID
+    function getLastIdUsers(){ //--> averiguar mas procesos para saber ID
         return datosUsuarios.length; //--> . length -> la cantidad de usuarios que tengo. 
+    }
+
+    function getLastIdInvestments(){
+        return userInvestments.length;
     }
     //Funcion para pushear cada usuario ingresado al arrray datosUsuarios
     function newUser (nombre, mail, usuario, contraseña, id){ //--> Se podrian haber puesto los promps aca adentro(testearlo en una nueva rama).
@@ -149,23 +168,27 @@
     }
 
     //Funcion para pushear nuevas inversiones del usuario al array userInvestments
-    function newInvestment (cryptoComprada, cantidadComprada,){
+    function newInvestment (cryptoComprada, cantidadComprada, id){
         userInvestments.push({
-            cryptoComprada:cryptomonedas[cryptoComprada -1],
+            cryptoComprada:cryptomonedas[cryptoComprada -1],//--> cryptoComprada -1 es una posicion de cryptomonedas. 1 de cryptoCompradas equivale a la posicion 0 del array cryptomonedas, de esa forma se hace que coincidan. 
             cantidadComprada,
+            id, 
            
         })
+        console.log(userInvestments);
     }
 
     // Funcion para imprimr todas las inversiones
     function getAllInvestments(){
-    userInvestments.forEach((dato)=> console.log(dato.cantidadComprada + '-' + dato.cryptoComprada)); //-->"dato" va a ser cada elemento de userInvestments en cada iteracion (forEach es un bucle que itera x cadaelemento del array). dato. se usa para que no imprima en formato array, si no el dato concreto. 
+    userInvestments.forEach((dato)=> console.log(dato.cantidadComprada + '-' + dato.cryptoComprada)); 
+    //-->"dato" va a ser cada elemento de userInvestments en cada iteracion (forEach es un bucle que itera x cadaelemento del array). dato. se usa para que no imprima en formato array, si no el dato concreto. 
+    // 
     }
 
 
     // Funcion para eliminar inversion
-    function deleteInvestment(id){
-        userInvestments = userInvestments.filter (dato => dato.if != id);
+    function deleteInvestment(id){ //-> estaba querido reasignar una constante (array userInvestments), por eso lo cambie a let. 
+        userInvestments = userInvestments.filter (dato => dato.id != id);
     }
 
     // funcion para realizar laz conversionsz
