@@ -117,11 +117,11 @@
                 alert('La opcion ingresada no es correcta, intente nuevamente');
         }
     }
-
+    // funcion para obtener ID
     function getLastID(){ //--> averiguar mas procesos para saber ID
         return datosUsuarios.length; //--> . length -> la cantidad de usuarios que tengo. 
     }
-
+    //Funcion para pushear cada usuario ingresado al arrray datosUsuarios
     function newUser (nombre, mail, usuario, contraseña, id){ //--> Se podrian haber puesto los promps aca adentro(testearlo en una nueva rama).
         datosUsuarios.push({
             nombre,
@@ -134,7 +134,7 @@
         // return 'Usuario agregado correctamente ' + id; 
     }
 
-    
+    //Funcion para pushear cada nueva conversion al array conversionesUsuarios
     function newConversion (moneda, crypto, monto){
         conversionesUsuarios.push({
             moneda: monedas[moneda -1],
@@ -143,7 +143,12 @@
         })
         
     }
+    //Funcion para eliminar conversion
+    function deleteConversion(id){
+        conversionesUsuarios = conversionesUsuarios.filter (dato =>dato.id != id);
+    }
 
+    //Funcion para pushear nuevas inversiones del usuario al array userInvestments
     function newInvestment (cryptoComprada, cantidadComprada,){
         userInvestments.push({
             cryptoComprada:cryptomonedas[cryptoComprada -1],
@@ -157,17 +162,13 @@
     userInvestments.forEach((dato)=> console.log(dato.cantidadComprada + '-' + dato.cryptoComprada)); //-->"dato" va a ser cada elemento de userInvestments en cada iteracion (forEach es un bucle que itera x cadaelemento del array). dato. se usa para que no imprima en formato array, si no el dato concreto. 
     }
 
-    //Funcion para eliminar conversion
-    function deleteConversion(id){
-        conversionesUsuarios = conversionesUsuarios.filter (dato =>dato.id != id);
-    }
 
     // Funcion para eliminar inversion
     function deleteInvestment(id){
         userInvestments = userInvestments.filter (dato => dato.if != id);
     }
 
-
+    // funcion para realizar laz conversionsz
     function converter(moneda, crypto, monto){
         if ( moneda === 1 && crypto === 1){
             return ('$' + monto + ' = '+ monto / precioBtc + 'BTC');
