@@ -10,25 +10,37 @@
             apellido: 'Perez',
             mail:'pedro_montero@gmail.com',
             usuario: 'Pepemonte1',
-            contraseña: 'Pepe123',
+            contraseña: 'Btc1230',
+            cryptoFav: 'BTC',
         },
         {
             id:2,
             nombre:'Juan',
             apellido: 'Gonzales',
             mail:'juan_gonzales@gmail.com',
-            usuario: 'lalal23',
-            contraseña: 'lalal23',
+            usuario: 'Juaneth1',
+            contraseña: 'Ethereum293',
+            cryptoFav: 'ETH',
+        },
+        {
+            id:3,
+            nombre:'Manuel',
+            apellido: 'Conde',
+            mail:'manu_conde@gmail.com',
+            usuario: 'Manueht12',
+            contraseña: 'Ethereum999',
+            cryptoFav: 'ETH',
         }
     ]
-    // console.log(datosUsuarios);
+    console.log(datosUsuarios);
 
-    // // Metodo de filtrado array (apellido)
-    // const busqueda = datosUsuarios.filter(dato =>{
-    //     return dato.apellido  === 'Gonzales';
-    //     }
-    // )
-    // console.log(busqueda);
+    //Metodo filter datosUsuarios.cryptoFav
+    let userCryptoFav = datosUsuarios.filter(function(datosUsuarios){return datosUsuarios.cryptoFav === 'ETH';})
+    // console.log(userCryptoFav);
+
+    //Metodo filter datosUsuarios.apellido
+    const busqueda = datosUsuarios.filter(dato =>{return dato.apellido  === 'Gonzales';})
+    console.log(busqueda);
 
     // Array para recolectar las conversiones de cada usuario
     const conversionesUsuarios =[
@@ -63,6 +75,8 @@
     ]
     console.log(userInvestments);
 
+    // Metodo filter userInvestments.cryptoComprada (HACER)
+
     //Array monedas
     const monedas = ['USD','ARS',]
 
@@ -83,12 +97,14 @@
         switch(option){
             case 1:
                 const nombre = prompt('Ingresa tu nombre');
+                const apellido = prompt('Ingresa tu apellido');
                 const mail = prompt('Ingresa tu mail');
                 const usuario = prompt('Ingresa tu usuario');
-                const contraseña =prompt ('Ingresa tu contraseña')
+                const contraseña =prompt ('Ingresa tu contraseña');
+                const cryptoFav = prompt ('Cual es tu cryptomoneda favorita? \n1)BTC\n2)ETH');
                 const creationIdusers = getLastIdUsers() + 1;
                 // const id = datosUsuarios.length + 1; //--> se haria de esta forma, pero lo hicimos con una funcion para abstraer y encapsular un comportamiento e invocarlo aca. 
-                newUser(nombre, mail, usuario, contraseña, creationIdusers); //--> chequear el ultimo id para que sirve. Como pushea el id al array?  
+                newUser(nombre, apellido, mail, usuario, contraseña, cryptoFav, creationIdusers); //--> chequear el ultimo id para que sirve. Como pushea el id al array?  
                 alert('Bienvenido ' + nombre + 'ID: '+ creationIdusers);
                 break;
             case 2:
@@ -132,12 +148,14 @@
         return userInvestments.length;
     }
     //Funcion para pushear cada usuario ingresado al arrray datosUsuarios (llenar de datos el array)
-    function newUser (nombre, mail, usuario, contraseña, id){ //--> Se podrian haber puesto los promps aca adentro(testearlo en una nueva rama).
+    function newUser (nombre, apellido, mail, usuario, contraseña, cryptoFavorita, id){ //--> Se podrian haber puesto los promps aca adentro(testearlo en una nueva rama).
         datosUsuarios.push({
             nombre,
+            apellido,
             mail,
             usuario, 
             contraseña,
+            cryptoFavorita,
             id,
         })
         console.log(datosUsuarios);
