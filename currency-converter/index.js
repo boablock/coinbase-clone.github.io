@@ -50,33 +50,24 @@
     //Array inversiones de usuarios
     let userInvestments =[
         {
-            id:1,
             cryptoComprada: 'BTC',
             cantidadComprada: 0.01, 
+            id:1,
         },
         {
-            id:2,
             cryptoComprada:'ADA',
             cantidadComprada: 100,
+            id:2,
         }
         
     ]
     console.log(userInvestments);
 
     //Array monedas
-    const monedas=[
-        'USD',
-        'ARS',
-    ]
+    const monedas = ['USD','ARS',]
 
     //Array cryptomonedas
-    const cryptomonedas =[
-        'BTC',
-        'ETH',
-        'ADA',
-        'BNB',
-        'USDT',
-    ]
+    const cryptomonedas = [ 'BTC','ETH','ADA','BNB','USDT']
     // console.log(cryptomonedas);
     
     let option;
@@ -97,14 +88,14 @@
                 const contraseña =prompt ('Ingresa tu contraseña')
                 const creationIdusers = getLastIdUsers() + 1;
                 // const id = datosUsuarios.length + 1; //--> se haria de esta forma, pero lo hicimos con una funcion para abstraer y encapsular un comportamiento e invocarlo aca. 
-                newUser(nombre, mail, usuario, contraseña, id);
+                newUser(nombre, mail, usuario, contraseña, creationIdusers); //--> chequear el ultimo id para que sirve. Como pushea el id al array?  
                 alert('Bienvenido ' + nombre + 'ID: '+ creationIdusers);
                 break;
             case 2:
                 moneda = parseInt(prompt('ingrese un numero segun sea su moneda: \n 1)USD 2)ARS'));
                 crypto = parseInt(prompt('Ingrese un numero segun la criptomoneda deseada: \n1)BTC \n2)ETH'));
                 monto = parseInt(prompt('Ingrese el monto que desee convertir'));
-                alert(converter(moneda, crypto, monto));
+                alert(converter(moneda, crypto, monto)); //->sin un alert o console.log no se aprovechaba el return de la funcion converter. Por eso no mostraba nada. 
                 newConversion(moneda, crypto, monto);
                 break;
            
@@ -114,8 +105,8 @@
                 if (optionInvestmentSection === 1){
                 cryptoComprada = prompt('Ingrese la cryptomoneda que a comprado: \n1) BTC\n2) ETH\n3) ADA \n4)BNB \n 5)USDT');
                 cantidadComprada= parseFloat(prompt('Ingrese la cantidad comprada en unidades'));
-                newInvestment(cryptoComprada, cantidadComprada);
-                const creationIdInvestments = getLastIdInvestments() +1;
+                let creationIdInvestments = getLastIdInvestments() +1;
+                newInvestment(cryptoComprada, cantidadComprada, creationIdInvestments); 
                 alert('Usted a agregado la siguiente inversion: \n ' + cryptoComprada  + ' - ' + cantidadComprada + ' ID: ' + creationIdInvestments);
                 }else if (optionInvestmentSection === 2){
                     getAllInvestments(); // me tira undefined al final 
@@ -140,7 +131,7 @@
     function getLastIdInvestments(){
         return userInvestments.length;
     }
-    //Funcion para pushear cada usuario ingresado al arrray datosUsuarios
+    //Funcion para pushear cada usuario ingresado al arrray datosUsuarios (llenar de datos el array)
     function newUser (nombre, mail, usuario, contraseña, id){ //--> Se podrian haber puesto los promps aca adentro(testearlo en una nueva rama).
         datosUsuarios.push({
             nombre,
