@@ -26,21 +26,21 @@
             id:3,
             nombre:'Manuel',
             apellido: 'Conde',
-            mail:'manu_conde@gmail.com',
+            mail:'manu_conde@gmail.com', 
             usuario: 'Manueht12',
             contraseña: 'Ethereum999',
             cryptoFav: 'ETH',
         }
     ]
-    console.log(datosUsuarios);
+    // console.log(datosUsuarios);
 
     //Metodo filter datosUsuarios.cryptoFav
     let userCryptoFav = datosUsuarios.filter(function(datosUsuarios){return datosUsuarios.cryptoFav === 'ETH';})
-    // console.log(userCryptoFav);
+    console.log(userCryptoFav);
 
     //Metodo filter datosUsuarios.apellido
     const busqueda = datosUsuarios.filter(dato =>{return dato.apellido  === 'Gonzales';})
-    console.log(busqueda);
+    // console.log(busqueda);
 
     // Array para recolectar las conversiones de cada usuario
     const conversionesUsuarios =[
@@ -73,7 +73,7 @@
         }
         
     ]
-    console.log(userInvestments);
+    // console.log(userInvestments);
 
     // Metodo filter userInvestments.cryptoComprada (HACER)
 
