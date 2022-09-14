@@ -1,6 +1,6 @@
 
 
-    // MODELO-AFTER
+    // INCORPORAR-EVENTOS
     
     // Array para recolectar los datos de cada usuario
     
