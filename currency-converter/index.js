@@ -28,9 +28,8 @@ agregandoResultado = document.createElement("div");
 btnConvertir.addEventListener("click", () => {
     let resultadoFinal = conversor();
     console.log(resultadoFinal);
-    agregandoResultado.innerHTML = `<h1>${resultadoFinal}</h1>`;
+    agregandoResultado.innerHTML = `<h1>${'Resultado: ' + resultadoFinal +' BTC '}</h1>`;
 });
 
 document.body.append(agregandoResultado);
 
-     
