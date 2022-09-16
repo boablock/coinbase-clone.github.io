@@ -12,20 +12,23 @@
 <body>
 
     <div>
-     
         <form action="">
-        <p>Seleccione su moneda</p>
-        <input type="radio" id="USD"> USD
-        <input type="radio" id="ARS"> ARS
-        <p>Seleccione la cryptomoneda </p>
-        <input type="radio" id="BTC"> BTC
-        <input type="radio" id="ETH"> ETH
-        <p>Ingrese el monto</p>
-        <input type="number" id="monto" placeholder="monto" >
-        <input type="button" id="btnConvertir" value="Convertir" >
-        <div id="padreResultado">
-  
-        </div>
+            <h1>Conversor de monedas</h1>
+            <p>Seleccione su moneda</p>
+            <select name="" id="de">
+                <option value="1">USD</option>
+                <option value="2">ARS</option>            </select>
+            <p>Seleccione la cryptomoneda </p>
+            <select name="" id="a">
+                <option value="1">BTC</option>
+                <option value="2">ETH</option> 
+            </select>
+            <p>Ingrese el monto</p>
+            <input type="number" id="monto" placeholder="monto" >
+            <input type="button" id="btnConvertir" value="Convertir" >
+            <div id="padreResultado">
+                
+            </div>
     </div>
 </form>
     <script src="index.js"></script>
