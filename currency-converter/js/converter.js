@@ -40,7 +40,7 @@ document.body.append(agregandoResultado);
 
 
 
-
+/*
     // MASTER
     
     // Array para recolectar los datos de cada usuario
@@ -125,3 +125,74 @@ document.body.append(agregandoResultado);
   //Array cryptomonedas
   const cryptomonedas = [ 'BTC','ETH','ADA','BNB','USDT']
   // console.log(cryptomonedas);
+
+   // funcion para obtener ID
+   function getLastIdUsers(){ //--> averiguar mas procesos para saber ID
+    return datosUsuarios.length; //--> . length -> la cantidad de usuarios que tengo. 
+}
+
+function getLastIdInvestments(){
+    return userInvestments.length;
+}
+//Funcion para pushear cada usuario ingresado al arrray datosUsuarios (llenar de datos el array)
+function newUser (nombre, apellido, mail, usuario, contraseña, cryptoFavorita, id){ //--> Se podrian haber puesto los promps aca adentro(testearlo en una nueva rama).
+    datosUsuarios.push({
+        nombre,
+        apellido,
+        mail,
+        usuario, 
+        contraseña,
+        cryptoFavorita,
+        id,
+    })
+    console.log(datosUsuarios);
+    // return 'Usuario agregado correctamente ' + id; 
+}
+
+//Funcion para pushear cada nueva conversion al array conversionesUsuarios
+function newConversion (moneda, crypto, monto){
+    conversionesUsuarios.push({
+        moneda: monedas[moneda -1],
+        crypto: cryptomonedas [crypto -1],
+        monto,
+    })
+    
+}
+//Funcion para eliminar conversion
+function deleteConversion(id){
+    conversionesUsuarios = conversionesUsuarios.filter (dato =>dato.id != id);
+}
+
+//Funcion para pushear nuevas inversiones del usuario al array userInvestments
+function newInvestment (cryptoComprada, cantidadComprada, id){
+    userInvestments.push({
+        cryptoComprada:cryptomonedas[cryptoComprada -1],//--> cryptoComprada -1 es una posicion de cryptomonedas. 1 de cryptoCompradas equivale a la posicion 0 del array cryptomonedas, de esa forma se hace que coincidan. 
+        cantidadComprada,
+        id, 
+       
+    })
+    console.log(userInvestments);
+}
+
+// Funcion para imprimr todas las inversiones
+function getAllInvestments(){
+userInvestments.forEach((dato)=> console.log(dato.cantidadComprada + '-' + dato.cryptoComprada)); 
+//-->"dato" va a ser cada elemento de userInvestments en cada iteracion (forEach es un bucle que itera x cadaelemento del array). dato. se usa para que no imprima en formato array, si no el dato concreto. 
+// 
+}
+
+
+// Funcion para eliminar inversion
+function deleteInvestment(id){ //-> estaba querido reasignar una constante (array userInvestments), por eso lo cambie a let. 
+    userInvestments = userInvestments.filter (dato => dato.id != id);
+}
+
+
+
+
+
+
+// const suma = (a,b) => a / b; 
+// alert(suma(monto),precioBtc); 
+
+*/
