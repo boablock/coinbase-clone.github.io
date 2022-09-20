@@ -42,12 +42,10 @@ document.body.append(agregandoResultado);
 
 
   class Conversiones{
-    constructor(moneda, crypto, monto, idUser, idConversion){
+    constructor(moneda, crypto, monto){
       this.moneda = moneda;
       this.crypto = crypto;
       this.monto = monto; 
-      this.idUser = idUser;
-      this.idConversion;
     }
   }
 
@@ -55,7 +53,7 @@ document.body.append(agregandoResultado);
 
   const selectMoneda = document.querySelector('#de');
   
-  selectMoneda.addEventListener('click',convert)
+  selectMoneda.addEventListener('click',convert); 
   function convert (){
     console.log(selectMoneda);
   }
