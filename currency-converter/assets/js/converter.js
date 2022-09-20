@@ -41,3 +41,24 @@ document.body.append(agregandoResultado);
 
 
 
+  class Conversiones{
+    constructor(moneda, crypto, monto, idUser, idConversion){
+      this.moneda = moneda;
+      this.crypto = crypto;
+      this.monto = monto; 
+      this.idUser = idUser;
+      this.idConversion;
+    }
+  }
+
+  // Como hago para capturar la seleccion de la moneda y mandar el dato a un array de conversiones?
+
+  const selectMoneda = document.querySelector('#de');
+  
+  selectMoneda.addEventListener('click',convert)
+  function convert (){
+    console.log(selectMoneda);
+  }
+
+
+  
