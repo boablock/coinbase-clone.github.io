@@ -1,5 +1,6 @@
 
-  // INCORPORAR-EVENTOS
+  // SEGUNDA ENTREGA
+
 
 let precioBtc = 20000;
 let precioEth = 2000;

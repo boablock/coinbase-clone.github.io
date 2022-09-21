@@ -1,5 +1,5 @@
 
-
+//SEGUNDA-ENTREGA
 class Inversiones{
     constructor(moneda, cantidad,linkInfo){
         this.moneda = moneda;
