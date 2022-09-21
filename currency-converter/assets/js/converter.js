@@ -1,5 +1,5 @@
 
-  // SEGUNDA ENTREGA
+  // SEGUNDA-ENTREGA
 
 
 let precioBtc = 20000;
