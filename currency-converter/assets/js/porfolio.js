@@ -1,4 +1,24 @@
 
+/**FUNCIONALIDADES:
+ * 
+ * 
+ * 
+ * METODOLOGIA:
+ * 
+ * 
+ * 
+ * 
+ * -----------DUDAS---------------
+ * 
+ * 
+ * 
+ * Anotaciones: preventdefault para la recarga del formulario (prevenir el envio).
+ */
+
+
+
+
+
 //SEGUNDA-ENTREGA
 class Inversiones{
     constructor(moneda, cantidad,linkInfo){
