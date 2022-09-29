@@ -28,3 +28,25 @@ function saveUserData(e){
    e.preventDefault();
 }
 
+let password = document.getElementById('input-pass');
+
+password.addEventListener('focus', () => {
+    Toastify({
+        text: "Su contraseña debe tener al menos 5 caracteres",
+        duration: 3000,
+        // destination: "https://github.com/apvarun/toastify-js",
+        // newWindow: true,
+        // close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "center", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, #00b09b, #96c93d)",
+        },
+        onclick: function(){
+            
+        }
+        // Callback after click
+      }).showToast();
+})
+
