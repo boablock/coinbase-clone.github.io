@@ -81,7 +81,7 @@ function crearBotonEliminar(inversion){
         <input type="text" id="titulo" placeholder="Moneda">
         <input type="number" id="duracion" placeholder="Cantidad">
         <input type="text" id="linkTrailer" placeholder="Link info">
-        <button type="submit">Inversion</button>
+        <button type="submit">Guardar inversion</button>
       </form>`;
   
     document.getElementById("formulario-inversion").addEventListener("submit", agregarInversion);
