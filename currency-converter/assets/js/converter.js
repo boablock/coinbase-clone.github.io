@@ -1,5 +1,5 @@
 
-  // SEGUNDA-ENTREGA
+  // FETCH
 
 
 let precioBtc = 20000;
