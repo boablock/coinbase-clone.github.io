@@ -1,0 +1,17 @@
+[
+    {
+        "id" : 1,
+        "nombre": "Bitcoin",
+        "siglas": "BTC",
+        "precio": 20000
+
+    },
+    {
+        "id" : 2,
+        "nombre": "Hethereum",
+        "siglas": "ETH",
+        "precio": 1000
+
+    }
+    
+]

@@ -1,63 +1,37 @@
 
-  // SEGUNDA-ENTREGA
+//Queries selectors
+const moneda_uno = document.querySelector('#moneda-uno');
+const moneda_dos = document.querySelector('#moneda-dos');
+const cantidad_uno = document.querySelector('#cantidad-uno');
+const cantidad_dos = document.querySelector('#cantidad-dos');
+const btn_swap = document.querySelector('#btn-swap');
+const equivalencia = document.querySelector('#equivalencia');
 
-
-let precioBtc = 20000;
-let precioEth = 2000;
-let resultado = 0;
-let monto;
-
-function conversor() {
-  monto = parseInt(document.querySelector("#monto").value);
-  let de = document.querySelector('#de').value;
-  let a = document.querySelector ('#a').value;
-  let USD = 300;
-  if ( de === '1' && a === '1'){
-    return (resultado = monto / precioBtc + ' BTC');
-  } else if (de === '2' && a === '1'){
-    return (resultado = (monto / USD) / precioBtc + ' BTC');
-  } else if (de === '1' && a === '2'){
-    return (resultado = monto / precioEth + ' ETH');
-  } else if (a === '2' && de === '2'){
-    return (resultado = (monto / USD) / precioEth + ' ETH');
-  } else {
-    alert("Tienes que completar todos los inputs");
-  }
-
-
+//Funcion conversor, fetch + API
+function converter(){
+const monedaUno = moneda_uno.value;
+const monedaDos = moneda_dos.value; 
+fetch(`https://v6.exchangerate-api.com/v6/a92f12f8a3348cc4b24e521f/latest/${monedaUno}`)
+.then(res =>res.json())
+.then(data =>{
+  const taza = data.conversion_rates[monedaDos];
+  equivalencia.innerHTML= `1 ${monedaUno} = ${taza} ${monedaDos}`;
+  cantidad_dos.value = (cantidad_uno.value * taza).toFixed(2);
+  });
 }
 
-// Agregando listener en el boton convertir que mostrar resultado en h3:
-const btnConvertir = document.querySelector("#btnConvertir");
-agregandoResultado = document.createElement("div");
 
-btnConvertir.addEventListener("click", () => {
-    let resultadoConversion = conversor();
-    console.log(resultadoConversion);
-    agregandoResultado.innerHTML = `<h1>${resultadoConversion}</h1>`;
+taza.addEventListener('click',()=>{
+  temp = moneda_uno.value;
+  moneda_uno.value = moneda_dos.value;
+  moneda_dos.value = temp;
+  converter();
+})
 
-});
-
-document.body.append(agregandoResultado);
-
-
-
-  class Conversiones{
-    constructor(moneda, crypto, monto){
-      this.moneda = moneda;
-      this.crypto = crypto;
-      this.monto = monto; 
-    }
-  }
-
-  // Como hago para capturar la seleccion de la moneda y mandar el dato a un array de conversiones?
-
-  const selectMoneda = document.querySelector('#de');
+//Listeners
+moneda_uno.addEventListener('change', converter);
+cantidad_uno.addEventListener('input', converter);
+moneda_dos.addEventListener('change', converter);
+cantidad_dos.addEventListener('input', converter);
   
-  selectMoneda.addEventListener('click',convert); 
-  function convert (){
-    console.log(selectMoneda);
-  }
-
-
-  
+converter();
