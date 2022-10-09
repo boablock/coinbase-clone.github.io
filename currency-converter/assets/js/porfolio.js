@@ -1,6 +1,7 @@
 
 /**FUNCIONALIDADES:
- * 
+ * Vendria a ser como un excel para entender que monedas tengo, que valor en usd o en arg tengo, y de ahi 
+ * sumarle cosas (que % del porfolio son x ponedas de tanto MC).
  * 
  * 
  * METODOLOGIA:

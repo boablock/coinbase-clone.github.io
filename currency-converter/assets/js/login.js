@@ -2,6 +2,7 @@
 
 
 document.getElementById('form-user').addEventListener('submit', saveUserData);
+let password = document.getElementById('input-pass');
 
 function saveUserData(e){
     let email = document.getElementById('input-email').value; 
@@ -9,7 +10,7 @@ function saveUserData(e){
     // console.log(email, password);
 
     const userData = {
-        email,
+        email, 
         password,
     }; 
    
@@ -28,7 +29,6 @@ function saveUserData(e){
    e.preventDefault();
 }
 
-let password = document.getElementById('input-pass');
 
 password.addEventListener('focus', () => {
     Toastify({
