@@ -85,3 +85,77 @@ select:focus, input:focus, button:focus{
     cursor: pointer;
     border-radius: 5px;
 }
+
+
+/*WATCH LIST*/
+
+
+.body-watch-list{
+    min-width: 100%;
+    min-height: 100%;
+    width: 100%;
+    height: 100%;
+    background-color: #d5d5d5;
+
+}
+
+.container1{
+    max-width:300px;
+    position: relative;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+/* .container1 .card-header{
+    background-color: #fff;
+    padding: 10px;
+} */
+
+.container1 .card-content ul{
+    list-style:none;
+
+}
+
+.container1 .card-content ul li{
+    cursor:pointer;
+    background-color: #fefefe;
+    padding: 10px 5px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1);
+}
+
+.container1 .card-content ul li:not(:last-child){
+    margin-bottom: 10px;
+}
+
+.container1 .card-content ul li .img-content {
+    width: 50px;
+    background-color: #ebeef3;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 5px;
+}
+
+.container1 .card-content ul li .img-content img{
+    width: 100%;
+    padding: 5px;
+        
+}
+
+.coin-name{
+    padding: 10px;
+}
+
+.div-coin-name{
+    height: 20%;
+}
+
+.btnAddToWatchList{
+    border-radius: 5px;
+    background-color: blueviolet;
+    margin-left: 40px;
+}
+
+

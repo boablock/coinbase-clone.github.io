@@ -1,142 +1,167 @@
 
-/**FUNCIONALIDADES:
- * 1)Boton crear lista de seguimineto
- * 2)Desplegar lista de monedas
- * 3)Armar lista segun las monedas seleccionadas
- * 4)Poder borrar las monedas de la lista
- * METODOLOGIA:
- * 1)Crear funcion para crear lista de monedas
- * 2)Agrego un evento click al boton lista de monedas, para que despliegue la lista de monedas (evento crearListaMonedas).--> ¿como hago para que sea dentro de una card temporal?
- * 3)
- * a-Crear un evento click en el boton agregar de cada moneda, 
- * b-Crear array vacio de listaDeSeguimineto 
- * c-Creando luego la funcion para agregar esa moneda a la listaDeSeguimiento (function agregaraListaDeSeguimiento, con push al array) 
- * d-Invocar la funcion push dentro de la funcion de eventoBtnAgregar
- * 4)Crear funcion para renderizar la lista de seguimiento en el sitio
- * 5)Funcion borrar moneda de la lista de seguimiento
- * 6)Local storage
- * 
- * --------------DUDAS------------------
- * A)Como hacer para que el boton de lista monedas desplifue la lista solo una vez (que sea temporal).
- * B)Que la lista este dentro de una card (de la misma forma que hiciste la UL).
+/**FUNCIONALIDADES
+ * Desplgar listado de criptomonedas
+ * Agregar a lista de seguimiento las coins seleccionadas con su informacion pertinente 
+ * Opcion de borrar de la lista de seguimiento
+ * Gestion del local storage durante todo el proyecto
  */
 
+/**NOTAS
+ * 
+ * 
+ */
+//Array objetos - coins
 
-//Array monedas
-
-const monedas = [
+const coins = [
 {
-    nombre: 'BTC',
+    name: 'Bitcoin',
+    acronym: 'BTC',
+    img: '../images/btc-log.png',
     precio: 20000,
     marketcap: 20000000,
     tokenHolders: 'N',
     id: 1,
 },
 {
-    nombre: 'ETH',
-    precio: 1000,
+    name: 'Ethereum',
+    acronym: 'ETH',
+    img: '../images/eth-log.png',
+    precio: 2000,
     marketcap: 10000000,
     tokenHolders: 'N',
-    id:2,
+    id: 1,
 },
 {
-    nombre: 'USDT',
-    precio: 1,
-    marketcap: 20000000,
+    name: 'Binance',
+    acronym: 'BNB',
+    img: '../images/bnb-log.png',
+    precio: 500,
+    marketcap: 5000000,
     tokenHolders: 'N',
-    id:3,
+    id: 1,
 },
 {
-    nombre: 'ADA',
+    name: 'Cardano',
+    acronym: 'ADA',
+    img: '../images/ada-log.png',
     precio: 2,
-    marketcap: 600000,
+    marketcap: 4000000,
     tokenHolders: 'N',
-    id:4,
+    id: 1,
 },
 {
-    nombre: 'BNB',
-    precio: 400,
-    marketcap: 300000,
+    name: 'Theter',
+    acronym: 'USDT',
+    img: '../images/usdt-log.png',
+    precio: 2000,
+    marketcap: 10000000,
     tokenHolders: 'N',
-    id:5,
+    id: 1,
 },
+
 ];
 
-const btnDesplegarListaMonedas = document.querySelector('#btn-lista-monedas'); 
-const divListadoMonedas= document.querySelector('#div-listado-monedas');
-const ulListaDeSeguimiento= document.querySelector('#ul-lista-de-seguimiento');
+const btnDisplayCoinList = document.querySelector('#btn-coin-list'); 
+const divCoinList= document.querySelector('#div-coin-list');
+const ulWatchList= document.querySelector('#ul-watch-list');
 //3)b-/ 6)
-let listaDeSeguimiento = JSON.parse(localStorage.getItem('listaDeSeguimiento')) || [];
-//-> la idea es que la variable listaDeSeguimiento se cargue con lo que alla en el local storage. 
-// || [] ->operador avanzado: si da null, se crear un array vacio. Si el LS con el getiteim busca una key qeu no existe, devolvera null. Si esto, el array se cargaba de un null cuando el local storage estaba vacio. 
+let watchList= JSON.parse(localStorage.getItem('watchList')) || [];
+//-> la idea es que la variable watchList se cargue con lo que alla en el local storage. 
+// || [] ->operador avanzado: si da null, se crear un array vacio. Si el LS con el getitem busca una key qeu no existe, devolvera null. Si esto, el array se cargaba de un null cuando el local storage estaba vacio. 
 
 
-// 1)
-function crearListadoMonedas(){
-    monedas.forEach(moneda=>{
-        divListadoMonedas.innerHTML += ` 
-        <div>
-            <h4>${moneda.nombre}</4>
-            <button class='btnAgregaraSeguimiento' id='btn-agregar${moneda.id}'>Agregar</button>
-        </div> 
-        `
+// 1)Creo la lista tomando los datos de mi array y confeccionandola con templete strings
+function createWatchList(){ //-->aca iria la API? para poder recorrerla y crear al lista?
+    divCoinList.innerHTML="";
+    coins.forEach(coin=>{
+
+        divCoinList.innerHTML +=
+         ` 
+         <div class="container1">
+            <div class="card-content d-flex row">
+                <ul class="container">
+                    <li class="d-flex justify-content-start align-items-center">
+                        <div class="img-content">
+                            <img src="${coin.img}" alt="">
+                        </div>
+                        <div class="div-coin-name">
+                            <span class="coin-name">${coin.name}</span>
+                        </div>
+                        <button class='btnAddToWatchList' id='btn-add-coin${coin.id}'>Add Watchlist</button>
+                    </li>
+                </ul>
+                
+            </div>
+        </div>
+        `  
     })
-    EventoBtnAgregar();
+    addCoinEvent();
 }
 
-//2)
-btnDesplegarListaMonedas.addEventListener('click',()=>{
-    crearListadoMonedas();
+//2)Evento click al boton para desplegar la lista, aqui invocare a la funcion que crea la lista.
+btnDisplayCoinList.addEventListener('click',()=>{
+    createWatchList();
 })
 
-//3)a-
-function EventoBtnAgregar(){
-    monedas.forEach(moneda=>{
-        document.querySelector(`#btn-agregar${moneda.id}`).addEventListener('click',()=>{
-            agregaraListaDeSeguimiento(moneda);
+//3)a-Aqui creo un evento localizado dentro de mi lista dinamica, para poder crea la lista de seguimiento de mi usuario en funcion a la primer lista desplegada (es importante que la primer lista sea una API ya que necesito muchas coins).
+function addCoinEvent(){
+
+    coins.forEach(coin=>{
+        document.querySelector(`#btn-add-coin${coin.id}`).addEventListener('click',()=>{
+            addToWatchList(coin);
         })
 
     })
 }
-//3)c- (VER SI FUNCIONA EL PUSH)
-function agregaraListaDeSeguimiento(moneda){
-    let existe = listaDeSeguimiento.some(mon=>mon.id === moneda.id);
-    if (existe === false){ //-> la moneda va a entrar a la lista de seg por este if solo si no existiese la moneda en el array. 
-        moneda.cantidad = 1; //-> propiedad creada en el ejemplo del after
-        listaDeSeguimiento.push(moneda);
+//3)c- (VER SI FUNCIONA EL PUSH). Aqui creo la funcion de mi evento listener que finalmente agregara la coin a la lista de seguimiento final. Es importante hacer la logica para identificar si la coin ya esta en la lista o aun no fue agregada. 
+function addToWatchList(coin){
+    let exists = watchList.some(coin=>coin.id === coin.id);
+    if (exists === false){ //-> la coin va a entrar a la lista de seg por este if solo si no existiese la coin en el array. 
+        coin.cantidad = 1; //-> propiedad creada en el ejemplo del after
+        watchList.push(coin);
     }
     else{
-        let monFind = listaDeSeguimiento.find(mon => mon.id === moneda.id) // 
-        monFind.cantidad++;
+        let findCoin = watchList.find(coin => coin.id === coin.id) // 
+        findCoin.cantidad++;
     }
-    console.log(listaDeSeguimiento);
-    renderizarListaDeSeguimiento(); //-->voy a querer que se renderice la lista cada vez que se agregue un producto a la misma (al array listaDeSeguimietno).
+    console.log(watchList);
+    watchListRendering(); //-->voy a querer que se renderice la lista cada vez que se agregue un producto a la misma (al array listaDeSeguimietno).
 }
-//4)
+//4)Finalmente se renderiza la lista de seguimiento en funcion ah:
 //-> con esta funcion deja de pushear.
-function renderizarListaDeSeguimiento(){
-    ulListaDeSeguimiento.innerHTML =''; //-> limpia el ul en cada vuelta que da para que no se repita la renderizacion de la lista de seguimiento (para que no persista la carga anterior).
-    listaDeSeguimiento.forEach(moneda=>{
+function watchListRendering(){
+    ulWatchList.innerHTML =''; //-> limpia el ul en cada vuelta que da para que no se repita la renderizacion de la lista de seguimiento (para que no persista la carga anterior).
+    watchList.forEach(coin=>{
         let li = document.createElement('li');
         li.innerHTML += ` 
-        <hr> ${moneda.nombre} - Precio: $${moneda.precio} - Market cap: ${moneda.marketcap} - Token Holders: ${moneda.tokenHolders} - <button class='btnBorrar' id='btn-borrar${moneda.id}'>Borrar</button>  `;
-        ulListaDeSeguimiento.appendChild(li);
+        <hr> ${coin.nombre} - Price: $${coin.precio} - Market cap: ${coin.marketcap} - Token Holders: ${coin.tokenHolders} - <button class='btnDelete' id='btn-delete${coin.id}'>Delete </button>  `;
+        ulWatchList.appendChild(li);
         
     })
     //6)
-    localStorage.setItem('listaDeSeguimiento', JSON.stringify(listaDeSeguimiento));
-    borrarMoneda();
+    localStorage.setItem('watchList', JSON.stringify(watchList));
+    deleteCoin();
 }
 //5)
-function borrarMoneda(){
-    listaDeSeguimiento.forEach(moneda =>{
-        document.querySelector(`#btn-borrar${moneda.id}`).addEventListener('click',()=>{
-            let indice = listaDeSeguimiento.findIndex(element => element.id === moneda.id)
-            listaDeSeguimiento.splice(indice, 1);
-            renderizarListaDeSeguimiento();
+function deleteCoin(){
+    watchList.forEach(coin =>{
+        document.querySelector(`#btn-delete${coin.id}`).addEventListener('click',()=>{
+            let indice = watchList.findIndex(element => element.id === coin.id)
+            watchList.splice(indice, 1);
+            watchListRendering();
 
         })
     })
 }
 
-renderizarListaDeSeguimiento();
+watchListRendering();
+
+
+/*                
+        ` 
+        <div class="container d-flex justify-content-center ">
+            <h4>${coin.nombre}</4>
+            <button class='btnAddToWatchList' id='btn-add-coin${coin.id}'>Add</button>
+        </div> 
+        `
+*/
