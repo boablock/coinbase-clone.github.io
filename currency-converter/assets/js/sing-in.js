@@ -1,4 +1,13 @@
 
+/**FUNCIONALIDADES
+ * 
+ */
+
+/**NOTAS
+ * Hacer el archivo de validaciones aparte
+ * 
+ */
+
 const userName = document.querySelector('#input-name');
 const eMail = document.querySelector('#input-email');
 const password = document.querySelector('#input-password');
