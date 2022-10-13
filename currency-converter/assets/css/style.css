@@ -154,8 +154,14 @@ select:focus, input:focus, button:focus{
 
 .btnAddToWatchList{
     border-radius: 5px;
-    background-color: blueviolet;
+    background-color: salmon;
     margin-left: 40px;
 }
 
 
+/*HOME*/
+
+#coibase-log{
+    width: 60px;
+    border-radius: 100%;
+}

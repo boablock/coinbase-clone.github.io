@@ -15,48 +15,48 @@
 const coins = [
 {
     name: 'Bitcoin',
-    acronym: 'BTC',
+    ticker: 'BTC',
     img: '../images/btc-log.png',
-    precio: 20000,
+    price: 20000,
     marketcap: 20000000,
     tokenHolders: 'N',
     id: 1,
 },
 {
     name: 'Ethereum',
-    acronym: 'ETH',
+    ticker: 'ETH',
     img: '../images/eth-log.png',
-    precio: 2000,
+    price: 2000,
     marketcap: 10000000,
     tokenHolders: 'N',
-    id: 1,
+    id: 2,
 },
 {
     name: 'Binance',
-    acronym: 'BNB',
+    ticker: 'BNB',
     img: '../images/bnb-log.png',
-    precio: 500,
+    price: 500,
     marketcap: 5000000,
     tokenHolders: 'N',
-    id: 1,
+    id: 3,
 },
 {
     name: 'Cardano',
-    acronym: 'ADA',
+    ticker: 'ADA',
     img: '../images/ada-log.png',
-    precio: 2,
+    price: 2,
     marketcap: 4000000,
     tokenHolders: 'N',
-    id: 1,
+    id: 4,
 },
 {
     name: 'Theter',
-    acronym: 'USDT',
+    ticker: 'USDT',
     img: '../images/usdt-log.png',
-    precio: 2000,
+    price: 2000,
     marketcap: 10000000,
     tokenHolders: 'N',
-    id: 1,
+    id: 5,
 },
 
 ];
@@ -115,7 +115,7 @@ function addCoinEvent(){
 }
 //3)c- (VER SI FUNCIONA EL PUSH). Aqui creo la funcion de mi evento listener que finalmente agregara la coin a la lista de seguimiento final. Es importante hacer la logica para identificar si la coin ya esta en la lista o aun no fue agregada. 
 function addToWatchList(coin){
-    let exists = watchList.some(coin=>coin.id === coin.id);
+    let exists = watchList.some(coin=>coin.id === coins.id);
     if (exists === false){ //-> la coin va a entrar a la lista de seg por este if solo si no existiese la coin en el array. 
         coin.cantidad = 1; //-> propiedad creada en el ejemplo del after
         watchList.push(coin);
@@ -134,7 +134,7 @@ function watchListRendering(){
     watchList.forEach(coin=>{
         let li = document.createElement('li');
         li.innerHTML += ` 
-        <hr> ${coin.nombre} - Price: $${coin.precio} - Market cap: ${coin.marketcap} - Token Holders: ${coin.tokenHolders} - <button class='btnDelete' id='btn-delete${coin.id}'>Delete </button>  `;
+        <hr> ${coin.name} - Price: $${coin.price} - Market cap: ${coin.marketcap} - Token Holders: ${coin.tokenHolders} - <button class='btnDelete' id='btn-delete${coin.id}'>Delete </button>  `;
         ulWatchList.appendChild(li);
         
     })
