@@ -14,6 +14,7 @@ const monedaDos = moneda_dos.value;
 fetch(`https://v6.exchangerate-api.com/v6/a92f12f8a3348cc4b24e521f/latest/${monedaUno}`)
 .then(res =>res.json())
 .then(data =>{
+  console.log(data);
   const taza = data.conversion_rates[monedaDos];
   equivalencia.innerHTML= `1 ${monedaUno} = ${taza} ${monedaDos}`;
   cantidad_dos.value = (cantidad_uno.value * taza).toFixed(2);

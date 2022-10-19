@@ -12,80 +12,84 @@
  */
 //Array objetos - coins
 
-const coins = [
-{
-    name: 'Bitcoin',
-    acronym: 'BTC',
-    img: '../images/btc-log.png',
-    precio: 20000,
-    marketcap: 20000000,
-    tokenHolders: 'N',
-    id: 1,
-},
-{
-    name: 'Ethereum',
-    acronym: 'ETH',
-    img: '../images/eth-log.png',
-    precio: 2000,
-    marketcap: 10000000,
-    tokenHolders: 'N',
-    id: 1,
-},
-{
-    name: 'Binance',
-    acronym: 'BNB',
-    img: '../images/bnb-log.png',
-    precio: 500,
-    marketcap: 5000000,
-    tokenHolders: 'N',
-    id: 1,
-},
-{
-    name: 'Cardano',
-    acronym: 'ADA',
-    img: '../images/ada-log.png',
-    precio: 2,
-    marketcap: 4000000,
-    tokenHolders: 'N',
-    id: 1,
-},
-{
-    name: 'Theter',
-    acronym: 'USDT',
-    img: '../images/usdt-log.png',
-    precio: 2000,
-    marketcap: 10000000,
-    tokenHolders: 'N',
-    id: 1,
-},
+// const coins = [
+// {
+//     name: 'Bitcoin',
+//     ticker: 'BTC',
+//     img: '../images/btc-log.png',
+//     price: 20000,
+//     marketcap: 20000000,
+//     tokenHolders: 'N',
+//     id: 1,
+// },
+// {
+//     name: 'Ethereum',
+//     ticker: 'ETH',
+//     img: '../images/eth-log.png',
+//     price: 2000,
+//     marketcap: 10000000,
+//     tokenHolders: 'N',
+//     id: 2,
+// },
+// {
+//     name: 'Binance',
+//     ticker: 'BNB',
+//     img: '../images/bnb-log.png',
+//     price: 500,
+//     marketcap: 5000000,
+//     tokenHolders: 'N',
+//     id: 3,
+// },
+// {
+//     name: 'Cardano',
+//     ticker: 'ADA',
+//     img: '../images/ada-log.png',
+//     price: 2,
+//     marketcap: 4000000,
+//     tokenHolders: 'N',
+//     id: 4,
+// },
+// {
+//     name: 'Theter',
+//     ticker: 'USDT',
+//     img: '../images/usdt-log.png',
+//     price: 2000,
+//     marketcap: 10000000,
+//     tokenHolders: 'N',
+//     id: 5,
+// },
 
-];
+// ];
 
 const btnDisplayCoinList = document.querySelector('#btn-coin-list'); 
 const divCoinList= document.querySelector('#div-coin-list');
 const ulWatchList= document.querySelector('#ul-watch-list');
-//3)b-/ 6)
+
 let watchList= JSON.parse(localStorage.getItem('watchList')) || [];
 //-> la idea es que la variable watchList se cargue con lo que alla en el local storage. 
 // || [] ->operador avanzado: si da null, se crear un array vacio. Si el LS con el getitem busca una key qeu no existe, devolvera null. Si esto, el array se cargaba de un null cuando el local storage estaba vacio. 
 
 
-// 1)Creo la lista tomando los datos de mi array y confeccionandola con templete strings
-function createWatchList(){ //-->aca iria la API? para poder recorrerla y crear al lista?
-    divCoinList.innerHTML="";
-    coins.forEach(coin=>{
 
+
+function createCoinList(){ 
+
+    divCoinList.innerHTML="";
+    let url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'; 
+    fetch(url)
+    .then(response => response.json())
+    .then(data => data.forEach(coin=>{
         divCoinList.innerHTML +=
          ` 
-         <div class="container1">
-            <div class="card-content d-flex row">
-                <ul class="container">
-                    <li class="d-flex justify-content-start align-items-center">
+         <div class="container1 container d-flex justify-content-center">
+            <div class="card-content container d-flex justify-content-center ">
+                <ul class="container d-flex justify-content-center align-items-center ">
+                    <li class=" container d-flex justify-content-center align-items-center">
                         <div class="img-content">
-                            <img src="${coin.img}" alt="">
+                            <img src="${coin.image}" alt="">
                         </div>
                         <div class="div-coin-name">
-                            <span class="coin-name">${coin.name}</span>
+                            <span class="coin-name">${coin.id}</span>
                         </div>
                         <button class='btnAddToWatchList' id='btn-add-coin${coin.id}'>Add Watchlist</button>
                     </li>
@@ -94,28 +98,30 @@ function createWatchList(){ //-->aca iria la API? para poder recorrerla y crear 
             </div>
         </div>
         `  
-    })
+    }))
+    .catch(error => console.log(error))
+    
     addCoinEvent();
 }
 
-//2)Evento click al boton para desplegar la lista, aqui invocare a la funcion que crea la lista.
+
 btnDisplayCoinList.addEventListener('click',()=>{
-    createWatchList();
+    createCoinList();
 })
 
-//3)a-Aqui creo un evento localizado dentro de mi lista dinamica, para poder crea la lista de seguimiento de mi usuario en funcion a la primer lista desplegada (es importante que la primer lista sea una API ya que necesito muchas coins).
+
 function addCoinEvent(){
 
-    coins.forEach(coin=>{
+    data.forEach(coin=>{
         document.querySelector(`#btn-add-coin${coin.id}`).addEventListener('click',()=>{
             addToWatchList(coin);
         })
 
     })
 }
-//3)c- (VER SI FUNCIONA EL PUSH). Aqui creo la funcion de mi evento listener que finalmente agregara la coin a la lista de seguimiento final. Es importante hacer la logica para identificar si la coin ya esta en la lista o aun no fue agregada. 
+
 function addToWatchList(coin){
-    let exists = watchList.some(coin=>coin.id === coin.id);
+    let exists = watchList.some(coin=>coin.id === coins.id);
     if (exists === false){ //-> la coin va a entrar a la lista de seg por este if solo si no existiese la coin en el array. 
         coin.cantidad = 1; //-> propiedad creada en el ejemplo del after
         watchList.push(coin);
@@ -127,14 +133,13 @@ function addToWatchList(coin){
     console.log(watchList);
     watchListRendering(); //-->voy a querer que se renderice la lista cada vez que se agregue un producto a la misma (al array listaDeSeguimietno).
 }
-//4)Finalmente se renderiza la lista de seguimiento en funcion ah:
-//-> con esta funcion deja de pushear.
+
 function watchListRendering(){
     ulWatchList.innerHTML =''; //-> limpia el ul en cada vuelta que da para que no se repita la renderizacion de la lista de seguimiento (para que no persista la carga anterior).
     watchList.forEach(coin=>{
         let li = document.createElement('li');
         li.innerHTML += ` 
-        <hr> ${coin.nombre} - Price: $${coin.precio} - Market cap: ${coin.marketcap} - Token Holders: ${coin.tokenHolders} - <button class='btnDelete' id='btn-delete${coin.id}'>Delete </button>  `;
+        <hr> ${coin.name} - Price: $${coin.price} - Market cap: ${coin.marketcap} - Token Holders: ${coin.tokenHolders} - <button class='btnDelete' id='btn-delete${coin.id}'>Delete </button>  `;
         ulWatchList.appendChild(li);
         
     })
@@ -157,11 +162,5 @@ function deleteCoin(){
 watchListRendering();
 
 
-/*                
-        ` 
-        <div class="container d-flex justify-content-center ">
-            <h4>${coin.nombre}</4>
-            <button class='btnAddToWatchList' id='btn-add-coin${coin.id}'>Add</button>
-        </div> 
-        `
-*/
+
+
