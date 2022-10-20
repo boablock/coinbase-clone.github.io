@@ -79,6 +79,7 @@ function createCoinList(){
     fetch(url)
     .then(response => response.json())
     .then(data => data.forEach(coin=>{
+      console.log(data);
         divCoinList.innerHTML +=
          ` 
          <div class="container1 container d-flex justify-content-center">
