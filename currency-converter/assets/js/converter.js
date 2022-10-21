@@ -1,66 +1,100 @@
 
-//Queries selectors
-const moneda_uno = document.querySelector('#moneda-uno');
-const moneda_dos = document.querySelector('#moneda-dos');
-const cantidad_uno = document.querySelector('#cantidad-uno');
-const cantidad_dos = document.querySelector('#cantidad-dos');
-const btn_swap = document.querySelector('#btn-swap');
-const equivalencia = document.querySelector('#equivalencia');
-// Nodo select de prueba
-const select_crypto = document.querySelector('#cryptomonedas');
+const form = document.querySelector("#form-search");
+const moneda = document.querySelector("#moneda");
+const criptomoneda = document.querySelector("#criptomonedas");
+const formContainer = document.querySelector(".form-side");
+const containerAnswer = document.querySelector(".container-answer");
 
-// Prueba select con API coingeko
+const objBusqueda = { //-> el evento "change" seteara este objeto , evento que tiene asociada (se llamo) a la funcion getValue
+    moneda: '',
+    criptomoneda: ''
+}
 
-function createSelect(){
-  select_crypto.innerHTML="";
-  let url = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'; 
-    fetch(url)
-    .then(response => response.json())
-    .then(data => data.forEach(coin=>{
-      console.log(data);
-      select_crypto.innerHTML +=
-        ` 
-         <option value="${coin.symbol}">${coin.symbol}</option>
+document.addEventListener('DOMContentLoaded', () => {
+    consultarCriptos();
 
-        `  
-    }))
-    .catch(error => console.log(error))
+    form.addEventListener('submit', submitForm);
+    moneda.addEventListener('change', getValue); //-> the e.target.name of the getValue f(x) will be 'moneda'
+    criptomoneda.addEventListener('change', getValue);//-> e.target.name of the getValue f(x) will be 'criptomoneda', and the value will be the user selection: objBusqueda[e.target.name] = e.target.value;
     
-}
-
-select_crypto.addEventListener('click', createSelect);
-
-
-
-
-
-
-//Funcion conversor, fetch + API
-function converter(){
-const monedaUno = moneda_uno.value;
-const monedaDos = moneda_dos.value; 
-fetch(`https://v6.exchangerate-api.com/v6/a92f12f8a3348cc4b24e521f/latest/${monedaUno}`)
-.then(res =>res.json())
-.then(data =>{
-  console.log(data);
-  const taza = data.conversion_rates[monedaDos];
-  equivalencia.innerHTML= `1 ${monedaUno} = ${taza} ${monedaDos}`;
-  cantidad_dos.value = (cantidad_uno.value * taza).toFixed(2);
-  });
-}
-
-
-taza.addEventListener('click',()=>{
-  temp = moneda_uno.value;
-  moneda_uno.value = moneda_dos.value;
-  moneda_dos.value = temp;
-  converter();
 })
 
-//Listeners
-moneda_uno.addEventListener('change', converter);
-cantidad_uno.addEventListener('input', converter);
-moneda_dos.addEventListener('change', converter);
-cantidad_dos.addEventListener('input', converter);
-  
-converter();
+function submitForm(e){
+    e.preventDefault();
+    const {moneda, criptomoneda} = objBusqueda;
+    if (moneda === '' || criptomoneda === '') {
+        showError('Seleccione ambas monedas...');
+        return;
+    }
+    consultarAPI(moneda, criptomoneda);
+    //console.log(moneda);
+    //console.log(criptomoneda);
+}
+
+function consultarAPI(moneda, criptomoneda){
+    const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}`;
+    fetch(url)
+        .then(resultado => resultado.json())
+        .then(resultadoJson => {
+            mostrarCotizacion(resultadoJson.DISPLAY[criptomoneda][moneda]); //-> data response setting
+            //console.log(resultadoJson.DISPLAY[criptomoneda][moneda]);
+        })
+        .catch(error => console.log(error));
+}
+
+function mostrarCotizacion(data){
+    clearHTML();
+    const {PRICE, HIGHDAY, LOWDAY, CHANGEPCT24HOUR, LASTUPDATE} = data;
+    const answer = document.createElement('div');
+    answer.classList.add('display-info');
+    answer.innerHTML = `
+        <p class="main-price">Precio: <span>${PRICE}</span></p>
+        <p>Precio más alto del día:: <span>${HIGHDAY}</span></p>
+        <p>Precio más bajo del día: <span>${LOWDAY}</span></p>
+        <p>Variación últimas 24 horas: <span>${CHANGEPCT24HOUR}%</span></p>
+        <p>Última Actualización: <span>${LASTUPDATE}</span></p>
+    `;
+
+    containerAnswer.appendChild(answer);
+}
+
+
+
+function showError(mensage){
+    const error = document.createElement('p');
+    error.classList.add("error");
+    error.textContent = mensage;
+    formContainer.appendChild(error);
+    setTimeout(() => error.remove(), 3000);
+}
+
+function getValue(e){ //-> here you will get the value of the select where de function getValue is called. And then, both values (both selections, moneda y cryptomoneda) will be stored in the 'ObjBusqueda'.
+    objBusqueda[e.target.name] = e.target.value;
+    console.log(e.target.name); 
+}
+
+function consultarCriptos(){
+    const url = 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD';
+    
+    fetch(url)
+        .then(respuesta => respuesta.json())
+        .then(respuestaJson => {
+            selectCriptos(respuestaJson.Data);
+            //console.log(respuestaJson.Data);
+        })
+        .catch(error => console.log(error));
+}
+
+function selectCriptos(criptos){
+    criptos.forEach(cripto => {
+        const {FullName, Name} = cripto.CoinInfo;
+        const option = document.createElement("option");
+        option.value = Name;
+        option.textContent = FullName;
+        criptomoneda.appendChild(option);
+    });
+}
+
+function clearHTML(){
+    containerAnswer.innerHTML = '';
+}

@@ -1,271 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Link CSS -->
-    <link rel="stylesheet" href="/assets/css/style.css">
-	<!-- Link de Google Fonts-->
-    <link
-    href="https://fonts.googleapis.com/css2?family=Raleway:wght@500;600;700;800&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700&display=swap"
-    rel="stylesheet"
-  />
-  <!-- Links de Bootstrap -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-    crossorigin="anonymous"
-  />
-<title>Converter</title>
-<!--Boostrap stlylesheet-->
-<link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
-    <title>Converter</title>
-
-
+    <title>Buscador APIs</title>
+    <script src="custom.js" defer></script>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="body-converter container justify-content-center">
-    <h1 class="text-center mt-5 ">Conversor de moneda</h1>
-    <p class="text-center mt-3">Escoje la moneda y la cantidad para realizar la conversion</p>
+<body>
+    <section class="main-section">
+        <h2>Cotizador de Criptomonedas</h2> 
+        <div class="container">
+            <div class="image-side"></div>
+            <div class="form-side">
+                <form action="" id="form-search">
+                    <input type="number" id="amount" name="amount">
+                    <select id="moneda" name="moneda">
+                        <option value="">Elige tu moneda</option>
+                        <option value="USD">Dolar Estadounidense</option>
+                        <option value="MXN">Peso Mexicano</option>
+                        <option value="GBP">Libras</option>
+                        <option value="EUR">Euros</option>
+                    </select>
     
-    <div class="container w-50 mt-5 ">
-        <div class="moneda">
-            <select  id="cryptomonedas">
-                <select id="cryptomonedas"> 
-                    <!-- <option value="btc">btc</option>
-                    <option value="eth">eth</option>
-                    <option value="usdt">usdt</option>
-                    <option value="bnb">bnb</option>
-                    <option value="usdc">usdc</option>
-                    <option value="xrp">xrp</option> 
-                    <option value="busd">busd</option>         
-                    <option value="ada">ada</option>         
-                    <option value="sol">sol</option>         
-                    <option value="doge">doge</option>          
-                    <option value="dot">dot</option>
-                    <option value="matic">matic</option>
-                    <option value="shib">shib</option>
-                    <option value="dai">dai</option>
-                    <option value="trx">trx</option> 
-                    <option value="steth">steth</option>
-                    <option value="uni">uni</option>
-                    <option value="wbtc">wbtc</option>
-                    <option value="avax">avax</option>
-                    <option value="okb">okb</option>
-                    <option value="leo">leo</option>
-                    <option value="ltc">ltc</option>
-                    <option value="atom">atom</option>
-                    <option value="link">link</option> 
-                    <option value="etc">etc</option> 
-                    <option value="ftt">ftt</option>
-                    <option value="xlm">xlm</option>
-                    <option value="cro">cro</option> 
-                    <option value="xmr">xmr</option>
-                    <option value="qnt">qnt</option>
-                    <option value="near">near</option>
-                    <option value="algo">algo</option>
-                    <option value="bch">bch</option>
-                    <option value="lunc">lunc</option>
-                    <option value="vet">vet</option>
-                    <option value="fil">fil</option>
-                    <option value="flow">flow</option>
-                    <option value="hbar">hbar</option>
-                    <option value="ape">ape</option>
-                    <option value="frax">frax</option>
-                    <option value="egld">egld</option>
-                    <option value="icp">icp</option>
-                    <option value="xcn">xcn</option>
-                    <option value="xtz">xtz</option>
-                    <option value="aave">aave</option>
-                    <option value="sand">sand</option>
-                    <option value="mana">mana</option>
-                    <option value="axs">axs</option>
-                    <option value="eos">eos</option>
-                    <option value="tkx">tkx</option>
-                    <option value="theta">theta</option>
-                    <option value="mkr">mkr</option>
-                    <option value="ht">ht</option>
-                    <option value="ldo">ldo</option>
-                    <option value="cusdc">cusdc</option>
-                    <option value="chz">chz</option>
-                    <option value="kcs">kcs</option>
-                    <option value="apt">apt</option>
-                    <option value="bsv">bsv</option>
-                    <option value="usdp">usdp</option>
-                    <option value="tusd">tusd</option>
-                    <option value="btt">btt</option> 
-                    <option value="usdd">usdd</option>
-                    <option value="xec">xec</option>
-                    <option value="miota">miota</option>
-                    <option value="ethw">ethw</option>
-                    <option value="zec">zec</option>
-                    <option value="gt">gt</option>
-                    <option value="cake">cake</option>
-                    <option value="cdai">cdai</option>
-                    <option value="grt">grt</option>
-                    <option value="snx">snx</option>
-                    <option value="hnt">hnt</option>
-                    <option value="neo">neo</option>
-                    <option value="osmo">osmo</option>
-                    <option value="ceth">ceth</option>
-                    <option value="evmos">evmos</option>
-                    <option value="xrd">xrd</option>
-                    <option value="ftm">ftm</option>
-                    <option value="ar">ar</option>
-                    <option value="nexo">nexo</option>
-                    <option value="paxg">paxg</option>
-                    <option value="ens">ens</option>
-                    <option value="crv">crv</option>
-                    <option value="bit">bit</option>
-                    <option value="twt">twt</option>
-                    <option value="zil">zil</option>
-                    <option value="dash">dash</option> 
-                    <option value="rune">rune</option>
-                    <option value="klay">klay</option>
-                    <option value="enj">enj</option>
-                    <option value="cspr">cspr</option>
-                    <option value="xdc">xdc</option>
-                    <option value="bat">bat</option>
-                    <option value="fxs">fxs</option>
-                    <option value="kava">kava</option>
-                    <option value="rpl">rpl</option>
-                    <option value="cel">cel</option>
-                    <option value="xaut">xaut</option>
-                    <option value="stx">stx</option> -->
-                   </select>
-
-            </select>
-            <select id="moneda-uno">
-                <option value="AED">AED</option>
-                <option value="ARS">ARS</option>
-                <option value="AUD">AUD</option>
-                <option value="BGN">BGN</option>
-                <option value="BRL">BRL</option>
-                <option value="BSD">BSD</option>
-                <option value="CAD">CAD</option>
-                <option value="CHF">CHF</option>
-                <option value="CLP">CLP</option>
-                <option value="CNY">CNY</option>
-                <option value="COP">COP</option>
-                <option value="CZK">CZK</option>
-                <option value="DKK">DKK</option>
-                <option value="DOP">DOP</option>
-                <option value="EGP">EGP</option>
-                <option value="EUR">EUR</option>
-                <option value="FJD">FJD</option>
-                <option value="GBP">GBP</option>
-                <option value="GTQ">GTQ</option>
-                <option value="HKD">HKD</option>
-                <option value="HRK">HRK</option>
-                <option value="HUF">HUF</option>
-                <option value="IDR">IDR</option>
-                <option value="ILS">ILS</option>
-                <option value="INR">INR</option>
-                <option value="ISK">ISK</option>
-                <option value="JPY">JPY</option>
-                <option value="KRW">KRW</option>
-                <option value="KZT">KZT</option>
-                <option value="MXN">MXN</option>
-                <option value="MYR">MYR</option>
-                <option value="NOK">NOK</option>
-                <option value="NZD">NZD</option>
-                <option value="PAB">PAB</option>
-                <option value="PEN">PEN</option>
-                <option value="PHP">PHP</option>
-                <option value="PKR">PKR</option>
-                <option value="PLN">PLN</option>
-                <option value="PYG">PYG</option>
-                <option value="RON">RON</option>
-                <option value="RUB">RUB</option>
-                <option value="SAR">SAR</option>
-                <option value="SEK">SEK</option>
-                <option value="SGD">SGD</option>
-                <option value="THB">THB</option>
-                <option value="TRY">TRY</option>
-                <option value="TWD"selected>TWD</option>
-                <option value="UAH">UAH</option>
-                <option value="USD" >USD</option>
-                <option value="UYU">UYU</option>
-                <option value="VND">VND</option>
-                <option value="ZAR">ZAR</option>
-
-            </select>
-
-            <input 
-            type="number" 
-            id="cantidad-uno" 
-            placeholder="0"  
-            value="1"
-            >
+                    <select id="criptomonedas" name="criptomoneda">
+                        <option value="" >Elige tu criptomoneda</option>
+                    </select>
+    
+                    <input class="" type="submit" value="Cotizar" />
+                    <div class="container-answer"></div>
+                    <!-- <div class="display-info">
+                        <p class="main-price">Precio: <span>$433.33</span></p>
+                        <p>Precio más alto del día:: <span>$433.33</span></p>
+                        <p>Precio más bajo del día: <span>$433.33</span></p>
+                        <p>Variación últimas 24 horas: <span>$433.33</span></p>
+                        <p>Última Actualización: <span>$433.33</span></p>
+                    </div> -->
+                </form>
+            </div>
         </div>
-        <div class="taza-swap-container">
-            <button class="btn-swap" id="taza">
-                SWAP
-            </button>
-            <div class="swap " id="equivalencia"></div>
-        </div>
-        <div class="moneda">
-            <select id="moneda-dos">
-                <option value="AED">AED</option>
-                <option value="ARS">ARS</option>
-                <option value="AUD">AUD</option>
-                <option value="BGN">BGN</option>
-                <option value="BRL">BRL</option>
-                <option value="BSD">BSD</option>
-                <option value="CAD">CAD</option>
-                <option value="CHF">CHF</option>
-                <option value="CLP">CLP</option>
-                <option value="CNY">CNY</option>
-                <option value="COP">COP</option>
-                <option value="CZK">CZK</option>
-                <option value="DKK">DKK</option>
-                <option value="DOP">DOP</option>
-                <option value="EGP">EGP</option>
-                <option value="EUR" selected>EUR</option>
-                <option value="FJD">FJD</option>
-                <option value="GBP">GBP</option>
-                <option value="GTQ">GTQ</option>
-                <option value="HKD">HKD</option>
-                <option value="HRK">HRK</option>
-                <option value="HUF">HUF</option>
-                <option value="IDR">IDR</option>
-                <option value="ILS">ILS</option>
-                <option value="INR">INR</option>
-                <option value="ISK">ISK</option>
-                <option value="JPY">JPY</option>
-                <option value="KRW">KRW</option>
-                <option value="KZT">KZT</option>
-                <option value="MXN">MXN</option>
-                <option value="MYR">MYR</option>
-                <option value="NOK">NOK</option>
-                <option value="NZD">NZD</option>
-                <option value="PAB">PAB</option>
-                <option value="PEN">PEN</option>
-                <option value="PHP">PHP</option>
-                <option value="PKR">PKR</option>
-                <option value="PLN">PLN</option>
-                <option value="PYG">PYG</option>
-                <option value="RON">RON</option>
-                <option value="RUB">RUB</option>
-                <option value="SAR">SAR</option>
-                <option value="SEK">SEK</option>
-                <option value="SGD">SGD</option>
-                <option value="THB">THB</option>
-                <option value="TRY">TRY</option>
-                <option value="TWD">TWD</option>
-                <option value="UAH">UAH</option>
-                <option value="USD">USD</option>
-                <option value="UYU">UYU</option>
-                <option value="VND">VND</option>
-                <option value="ZAR">ZAR</option>
+        
 
-            </select>
-            <input 
-            type="number" id="cantidad-dos" placeholder="0" >
-        </div>
-    </div>
+    </section>
     <script src="../assets/js/converter.js"></script>
 </body>
 </html>
