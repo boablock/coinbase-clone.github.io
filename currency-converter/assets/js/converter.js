@@ -7,18 +7,20 @@ let precioEth = 2000;
 let resultado = 0;
 let monto;
 
+const moneda = document.querySelector('#moneda').value;
+const crypto = document.querySelector ('#crypto').value;
+
 function conversor() {
   monto = parseInt(document.querySelector("#monto").value);
-  let de = document.querySelector('#de').value;
-  let a = document.querySelector ('#a').value;
+
   let USD = 300;
-  if ( de === '1' && a === '1'){
+  if ( moneda === '1' && crypto === '1'){
     return (resultado = monto / precioBtc + ' BTC');
-  } else if (de === '2' && a === '1'){
+  } else if (moneda === '2' && crypto === '1'){
     return (resultado = (monto / USD) / precioBtc + ' BTC');
-  } else if (de === '1' && a === '2'){
+  } else if (moneda === '1' && crypto=== '2'){
     return (resultado = monto / precioEth + ' ETH');
-  } else if (a === '2' && de === '2'){
+  } else if (crypto === '2' && moneda === '2'){
     return (resultado = (monto / USD) / precioEth + ' ETH');
   } else {
     alert("Tienes que completar todos los inputs");
@@ -52,12 +54,12 @@ document.body.append(agregandoResultado);
 
   // Como hago para capturar la seleccion de la moneda y mandar el dato a un array de conversiones?
 
-  const selectMoneda = document.querySelector('#de');
+//   const selectMoneda = document.querySelector('#de');
   
-  selectMoneda.addEventListener('click',convert); 
-  function convert (){
-    console.log(selectMoneda);
-  }
+//   selectMoneda.addEventListener('click',convert); 
+//   function convert (){
+//     console.log(selectMoneda);
+//   }
 
 
   
