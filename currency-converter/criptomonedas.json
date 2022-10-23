@@ -1,17 +1,48 @@
 [
     {
-        "id" : 1,
-        "nombre": "Bitcoin",
-        "siglas": "BTC",
-        "precio": 20000
-
+        "name": "Bitcoin",
+        "ticker": "BTC",
+        "img": "../images/btc-log.png",
+        "price": 20000,
+        "marketcap": 20000000,
+        "tokenHolders": "N",
+        "id": 1
     },
     {
-        "id" : 2,
-        "nombre": "Hethereum",
-        "siglas": "ETH",
-        "precio": 1000
-
+        "name": "Ethereum",
+        "ticker": "ETH",
+        "img": "../images/eth-log.png",
+        "price": 2000,
+        "marketcap": 10000000,
+        "tokenHolders": "N",
+       "id": 2 
+    },
+    {
+        "name": "Binance",
+        "ticker": "BNB",
+        "img": "../images/bnb-log.png",
+        "price": 500,
+        "marketcap": 5000000,
+        "tokenHolders": "N",
+        "id": 3
+    },
+    {
+        "name": "Cardano",
+        "ticker": "ADA",
+        "img": "../images/ada-log.png",
+        "price": 2,
+        "marketcap": 4000000,
+        "tokenHolders": "N",
+        "id": 4
+    },
+    {
+        "name": "Theter",
+        "ticker": "USDT",
+        "img": "../images/usdt-log.png",
+        "price": 2000,
+        "marketcap": 10000000,
+        "tokenHolders": "N",
+        "id": 5
     }
     
 ]
