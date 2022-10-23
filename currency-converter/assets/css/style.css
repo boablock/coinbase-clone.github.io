@@ -157,6 +157,10 @@ select:focus, input:focus, button:focus{
         
 }
 
+#img-wathlist{
+width: 30px;
+}
+
 .coin-name{
     padding: 10px;
 }

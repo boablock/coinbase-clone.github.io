@@ -1,4 +1,3 @@
-
 /**FUNCIONALIDADES
  * Desplgar listado de criptomonedas
  * Agregar a lista de seguimiento las coins seleccionadas con su informacion pertinente 
@@ -12,73 +11,37 @@
  * in the else of addToWatchlist, add an toastify alert. 
  * agregar link o boton en cada li de watchlist para ver mas info de las monedas.  
  */
-//Array objetos - coins
 
-const coins = [
-{
-    name: 'Bitcoin',
-    ticker: 'BTC',
-    img: '../images/btc-log.png',
-    price: 20000,
-    marketcap: 20000000,
-    tokenHolders: 'N',
-    id: 1,
-},
-{
-    name: 'Ethereum',
-    ticker: 'ETH',
-    img: '../images/eth-log.png',
-    price: 2000,
-    marketcap: 10000000,
-    tokenHolders: 'N',
-    id: 2,
-},
-{
-    name: 'Binance',
-    ticker: 'BNB',
-    img: '../images/bnb-log.png',
-    price: 500,
-    marketcap: 5000000,
-    tokenHolders: 'N',
-    id: 3,
-},
-{
-    name: 'Cardano',
-    ticker: 'ADA',
-    img: '../images/ada-log.png',
-    price: 2,
-    marketcap: 4000000,
-    tokenHolders: 'N',
-    id: 4,
-},
-{
-    name: 'Theter',
-    ticker: 'USDT',
-    img: '../images/usdt-log.png',
-    price: 2000,
-    marketcap: 10000000,
-    tokenHolders: 'N',
-    id: 5,
-},   
 
-];
 
 const btnDisplayCoinList = document.querySelector('#btn-coin-list'); 
 const divCoinList= document.querySelector('#div-coin-list');
 const ulWatchList= document.querySelector('#ul-watch-list');
 
-let watchList = JSON.parse(localStorage.getItem('watchlist')) || []; 
+// let watchList = JSON.parse(localStorage.getItem('watchlist')) || []; 
+let watchList = [];
 //-> la idea es que la variable watchList se cargue con lo que alla en el local storage. 
 // || [] ->operador avanzado: si da null, se crear un array vacio. Si el LS con el getitem busca una key qeu no existe, devolvera null. Si esto, el array se cargaba de un null cuando el local storage estaba vacio. 
 
+btnDisplayCoinList.addEventListener('click', apiRequest);     
+
+function apiRequest (){
+    const url = '../criptomonedas.json'
+    fetch(url)
+        .then(res =>  res.json())
+        .then(data => {
+            createCoinList(data)
+            console.log(data)
+        }); 
+}
 
 
 
-function createCoinList(){  //--> do the same process with append child (you dont need the +=). Tmb con un MAP, luego del retorno del map, hay hacer un inner html
 
+function createCoinList(data){  //--> do the same process with append child (you dont need the +=). Tmb con un MAP, luego del retorno del map, hay hacer un inner html
     divCoinList.innerHTML="";
 
-     coins.forEach(coin=>{
+     data.forEach(coin=>{
     //   console.log(data);
         divCoinList.innerHTML +=
          ` 
@@ -99,26 +62,18 @@ function createCoinList(){  //--> do the same process with append child (you don
             </div>
         </div>
         `  
-      
         // console.log(coin.id);
     })
    
-   
-    addCoinEvent(coins);
-   
+    addCoinEvent(data);
 }
-
-
-btnDisplayCoinList.addEventListener('click',()=>{
-    createCoinList();
-})
 
 
 function addCoinEvent(array){
     
   array.forEach(coin=>{
         document.querySelector(`#btn-add-coin${coin.id}`).addEventListener('click',()=>{
-            // console.log(coin);
+            console.log(coin);
             addToWatchList(coin);
             
         })
@@ -138,7 +93,7 @@ function addToWatchList(coin){
     }
     console.log(watchList);
     watchListRendering(); 
-
+    // localStorage.setItem('watchlist', JSON.stringify(watchList));
 }
 
 
@@ -148,14 +103,17 @@ function watchListRendering(){
     watchList.forEach(coin=>{ //-> at this level, the watchList must have coins inside (you will called this function at this point, inside 'addToWAtchList' for example).
         let li = document.createElement('li');
         li.innerHTML += ` 
-        <hr> ${coin.name} - Price: $${coin.price} - Market cap: ${coin.marketcap} - Token Holders: ${coin.tokenHolders} - <button class='btnDelete' id='btn-delete${coin.id}'>Delete </button>  `;
+        <hr> <img id="img-wathlist" src='${coin.img}'> ${coin.name} - Price: $${coin.price} - Market cap: ${coin.marketcap} - Token Holders: ${coin.tokenHolders} - <button class='btnDelete' id='btn-delete${coin.id}'>Delete </button>  `;
         ulWatchList.appendChild(li);
         
     })
-    //6)
-    localStorage.setItem('watchlist', JSON.stringify(watchList));
+    // //6)
+  
     deleteCoin();
+    
 }
+
+
 //5)
 function deleteCoin(){
     watchList.forEach(coin =>{
@@ -168,6 +126,8 @@ function deleteCoin(){
     })
 }
 
+
+ /*
 watchListRendering();
 
 createCoinList();
@@ -186,4 +146,4 @@ function consultarJson(){
 
 consultarJson();
 
-
+*/
