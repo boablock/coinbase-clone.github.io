@@ -34,6 +34,7 @@ function createCoinList(data){  //--> do the same process with append child (you
 
         const {FullName, Id} = coin.CoinInfo;
     //   console.log(data);
+    
         divCoinList.innerHTML +=
          ` 
          <div class="container1 container d-flex justify-content-center">
@@ -53,22 +54,22 @@ function createCoinList(data){  //--> do the same process with append child (you
             </div>
         </div>
         `  
-        // console.log(coin.id);
     })
-   
+
     addCoinEvent(data);
 }
 
 
 
-function addCoinEvent(array){
+function addCoinEvent(array){ //-> aca tenes 10 objetos, cada uno tiene su CoinInfo.id, DISPLAY.USD.MKTCAP
     
   array.forEach(coin=>{
-    const {Id} = coin.CoinInfo;
-        document.querySelector(`#btn-add-coin${Id}`).addEventListener('click',()=>{
-            console.log(coin);
+    // const {Id} = coin.CoinInfo;
+        document.querySelector(`#btn-add-coin${coin.CoinInfo.Id}`).addEventListener('click',()=>{
+            console.log(coin.CoinInfo.Id);
             addToWatchList(coin);
-            
+            console.log(coin.CoinInfo);
+            console.log(coin.DISPLAY.USD.MKTCAP);
         })
    
     })
@@ -76,10 +77,11 @@ function addCoinEvent(array){
 
 
 
+
 //Aca estoy:minuto 28
 
 function addToWatchList(coin){
-    let exist = watchList.some(productoSome => productoSome.id === coin.id); //-> some retrun true or false, if the elemento is in the array or not. if there is a coindicence, it will return true, if not, false. Remember that you are recibing a coin throught the parameter 'coin' (where you called the function addToWatchList).
+    let exist = watchList.some(productoSome => productoSome.CoinInfo.Id === coin.CoinInfo.Id); //-> some retrun true or false, if the elemento is in the array or not. if there is a coindicence, it will return true, if not, false. Remember that you are recibing a coin throught the parameter 'coin' (where you called the function addToWatchList).
     console.log(exist);
     if( exist === false){
         watchList.push(coin)
@@ -87,18 +89,20 @@ function addToWatchList(coin){
         alert('This coin is already in your watch list')
     }
     console.log(watchList);
-    // watchListRendering(); 
+    watchListRendering(); 
     // localStorage.setItem('watchlist', JSON.stringify(watchList));
 }
 
-/*
+
 
 function watchListRendering(){
     ulWatchList.innerHTML =''; //-> limpia el ul en cada vuelta que da para que no se repita la renderizacion de la lista de seguimiento (para que no persista la carga anterior).
     watchList.forEach(coin=>{ //-> at this level, the watchList must have coins inside (you will called this function at this point, inside 'addToWAtchList' for example).
         let li = document.createElement('li');
+        let img = coin.CoinInfo.ImageUrl
         li.innerHTML += ` 
-        <hr> <img id="img-wathlist" src='${coin.img}'> ${coin.name} - Price: $${coin.price} - Market cap: ${coin.marketcap} - Token Holders: ${coin.tokenHolders} - <button class='btnDelete' id='btn-delete${coin.id}'>Delete </button>  `;
+        <hr> ${coin.CoinInfo.FullName} - Price: ${coin.DISPLAY.USD.PRICE} - VOL 24hs: ${coin.DISPLAY.USD.TOTALVOLUME24H
+        } - Max Supply: ${coin.CoinInfo.MaxSupply} - <button class='btnDelete' id='btn-delete${coin.CoinInfo.Id}'>Delete </button>  `;
         ulWatchList.appendChild(li);
         
     })
@@ -112,8 +116,8 @@ function watchListRendering(){
 //5)
 function deleteCoin(){
     watchList.forEach(coin =>{
-        document.querySelector(`#btn-delete${coin.id}`).addEventListener('click',()=>{
-            let indice = watchList.findIndex(element => element.id === coin.id)
+        document.querySelector(`#btn-delete${coin.CoinInfo.Id}`).addEventListener('click',()=>{
+            let indice = watchList.findIndex(element => element.CoinInfo.Id === coin.CoinInfo.Id)
             watchList.splice(indice, 1);
             watchListRendering();
 
@@ -121,4 +125,3 @@ function deleteCoin(){
     })
 }
 
-*/
