@@ -1,90 +1,39 @@
 
 
-/*CONVERTER*/
 
-:root {
-    --primary-color: #f5ce52;
-}
+/*HOME*/
 
-*{
-    box-sizing: border-box;
-}
 
-.body-convert{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f4f4f4;
+.block1, .block2 {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    height: 100vh;
-    margin: 0;
-    padding: 20px;
-}
-
-
-.btn-swap{
-    color: white;
-    background: var(--primary-color);
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 12px;
-    padding: 5px 12px;
-}
-
-
-
-.moneda{
-    padding: 40px 0;
-    display: flex;
     align-items: center;
-    justify-content: space-between;
+    height: 500px;
 }
 
-.moneda select{
-    padding: 10px 20px 10px 10px;
-    border: 1px solid #dedede;
-    font-size: 16px;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-}
-
-.moneda input {
-    border: 0;
-    font-size: 30px;
-    text-align: right;
-}
-
-.taza-swap-container{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.swap{
-    color: var(--primary-color);
-    font-size: 14px;
-    padding: 0 10px;
-    font-weight: 600;
-}
-
-select:focus, input:focus, button:focus{
-    outline: 0;
-}
-
-@media (max-width:600px) {
-    .moneda input{
-        width: 200px;
-    }
-    
-}
-
-#moneda-uno,
-#moneda-dos{
-    cursor: pointer;
+.btn-primary {
+    border-style: none;
+    transition: all 0.3s ease-in-out;
     border-radius: 5px;
-}
+    padding: 10px;
+  }
+  .btn-primary:hover {
+    background-color: black;
+    transform: scale(0.9);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*WATCH LIST*/
@@ -113,7 +62,7 @@ select:focus, input:focus, button:focus{
 .body-watch-list{
     border: 1px solid black;
 }
-#div-coin-list{
+.div-coin-list{
     border: 1px solid blue;
     height: 300px;
     width: 450px;
@@ -184,6 +133,9 @@ width: 30px;
     border-radius: 100%;
 }
 
+
+
+
 /*CONVERTER*/
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
@@ -242,7 +194,7 @@ input[type="submit"] {
     margin: 9px auto 0px;
     width: 50%;
     color: cadetblue;
-    background-color: #00a478;
+    background-color: blue;
     border: solid 0px #ada2a2;
     border-radius: 4px;
     text-transform: uppercase;
@@ -253,9 +205,9 @@ input[type="submit"] {
     font-family: 'Montserrat', sans-serif;
 }
 input[type="submit"]:hover {
-    color: #00a478;
+    color: blue;
     background-color: #fff;
-    border: solid 2px #00a478;
+    border: solid 2px blue;
 }
 .error {
     color: red;

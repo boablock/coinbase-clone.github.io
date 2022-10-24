@@ -29,7 +29,7 @@ function apiRequest (){
 
 function createCoinList(data){  //--> do the same process with append child (you dont need the +=). Tmb con un MAP, luego del retorno del map, hay hacer un inner html
     divCoinList.innerHTML="";
-
+    divCoinList.classList.add("div-coin-list");
      data.forEach(coin=>{
 
         const {FullName, Id} = coin.CoinInfo;
