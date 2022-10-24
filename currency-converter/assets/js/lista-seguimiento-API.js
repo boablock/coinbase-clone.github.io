@@ -8,7 +8,7 @@ const ulWatchList= document.querySelector('#ul-watch-list');
 
 // let watchList = JSON.parse(localStorage.getItem('watchlist')) || []; 
 let watchList = [];
-//-> la idea es que la variable watchList se cargue con lo que alla en el local storage. 
+//-> la idea es que la variable watchList se cargue con lo que alla en el local storage. The idea is to download watchlist array with the info stored in the localStorage
 // || [] ->operador avanzado: si da null, se crear un array vacio. Si el LS con el getitem busca una key qeu no existe, devolvera null. Si esto, el array se cargaba de un null cuando el local storage estaba vacio. 
 
 btnDisplayCoinList.addEventListener('click', apiRequest);     
@@ -27,13 +27,14 @@ function apiRequest (){
 
 
 
-function createCoinList(data){  //--> do the same process with append child (you dont need the +=). Tmb con un MAP, luego del retorno del map, hay hacer un inner html
+function createCoinList(data){  //--> do the same process with append child (you dont need the +=). With map to. 
     divCoinList.innerHTML="";
-
+    divCoinList.classList.add("div-coin-list");
      data.forEach(coin=>{
 
-        const {FullName, Id} = coin.CoinInfo;
+        const {FullName, Id} = coin.CoinInfo; //-> 404 error when i bring the coins logo images.
     //   console.log(data);
+    
         divCoinList.innerHTML +=
          ` 
          <div class="container1 container d-flex justify-content-center">
@@ -41,7 +42,7 @@ function createCoinList(data){  //--> do the same process with append child (you
                 <ul class="container d-flex justify-content-center align-items-center ">
                     <li class=" container d-flex justify-content-center align-items-center">
                         <div class="img-content">
-                            <img src="" alt="">
+                            <img src="../images/btc-log.png" alt=""> 
                         </div>
                         <div class="div-coin-name">
                             <span class="coin-name">${FullName}</span>
@@ -53,22 +54,21 @@ function createCoinList(data){  //--> do the same process with append child (you
             </div>
         </div>
         `  
-        // console.log(coin.id);
     })
-   
+
     addCoinEvent(data);
 }
 
 
 
-function addCoinEvent(array){
-    
+function addCoinEvent(array){ //->  Array of ten objects, each with his CoinInfo.Id, DISPLAY.USD.MKTCP, etc. 
   array.forEach(coin=>{
-    const {Id} = coin.CoinInfo;
-        document.querySelector(`#btn-add-coin${Id}`).addEventListener('click',()=>{
-            console.log(coin);
+    // const {Id} = coin.CoinInfo;
+        document.querySelector(`#btn-add-coin${coin.CoinInfo.Id}`).addEventListener('click',()=>{
+            console.log(coin.CoinInfo.Id);
             addToWatchList(coin);
-            
+            console.log(coin.CoinInfo);
+            console.log(coin.DISPLAY.USD.MKTCAP);
         })
    
     })
@@ -76,29 +76,34 @@ function addCoinEvent(array){
 
 
 
-//Aca estoy:minuto 28
 
 function addToWatchList(coin){
-    let exist = watchList.some(productoSome => productoSome.id === coin.id); //-> some retrun true or false, if the elemento is in the array or not. if there is a coindicence, it will return true, if not, false. Remember that you are recibing a coin throught the parameter 'coin' (where you called the function addToWatchList).
+    let exist = watchList.some(productoSome => productoSome.CoinInfo.Id === coin.CoinInfo.Id); //-> .some retrun true or false, if the element is in the array or not. if there is a coindicence, it will return true, if not, false. Remember that you are recibing a coin throught the parameter 'coin' (where you called addToWatchList function).
     console.log(exist);
     if( exist === false){
         watchList.push(coin)
     }else{
-        alert('This coin is already in your watch list')
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'This coin is already in your watchlist!',
+            footer: '<a href="">Why do I have this issue?</a>'
+          })
     }
     console.log(watchList);
-    // watchListRendering(); 
+    watchListRendering(); 
     // localStorage.setItem('watchlist', JSON.stringify(watchList));
 }
 
-/*
+
 
 function watchListRendering(){
-    ulWatchList.innerHTML =''; //-> limpia el ul en cada vuelta que da para que no se repita la renderizacion de la lista de seguimiento (para que no persista la carga anterior).
+    ulWatchList.innerHTML =''; //->  clean the ul in each lap to not repeat the  watchlist renderization; with this, the previuos load doesnt persist
     watchList.forEach(coin=>{ //-> at this level, the watchList must have coins inside (you will called this function at this point, inside 'addToWAtchList' for example).
         let li = document.createElement('li');
-        li.innerHTML += ` 
-        <hr> <img id="img-wathlist" src='${coin.img}'> ${coin.name} - Price: $${coin.price} - Market cap: ${coin.marketcap} - Token Holders: ${coin.tokenHolders} - <button class='btnDelete' id='btn-delete${coin.id}'>Delete </button>  `;
+        li.innerHTML += `
+        <hr> ${coin.CoinInfo.FullName} - Price: ${coin.DISPLAY.USD.PRICE} - VOL 24hs: ${coin.DISPLAY.USD.TOTALVOLUME24H
+        } - Max Supply: ${coin.CoinInfo.MaxSupply} - <button class='btnDelete' id='btn-delete${coin.CoinInfo.Id}'>Delete </button>  `;
         ulWatchList.appendChild(li);
         
     })
@@ -112,8 +117,8 @@ function watchListRendering(){
 //5)
 function deleteCoin(){
     watchList.forEach(coin =>{
-        document.querySelector(`#btn-delete${coin.id}`).addEventListener('click',()=>{
-            let indice = watchList.findIndex(element => element.id === coin.id)
+        document.querySelector(`#btn-delete${coin.CoinInfo.Id}`).addEventListener('click',()=>{
+            let indice = watchList.findIndex(element => element.CoinInfo.Id === coin.CoinInfo.Id)
             watchList.splice(indice, 1);
             watchListRendering();
 
@@ -121,4 +126,3 @@ function deleteCoin(){
     })
 }
 
-*/

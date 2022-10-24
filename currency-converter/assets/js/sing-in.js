@@ -1,24 +1,9 @@
 
-/**FUNCIONALIDADES
- * 
- */
-
-/**NOTAS
- * Hacer el archivo de validaciones aparte
- * 
- */
-
 const userName = document.querySelector('#input-name');
 const eMail = document.querySelector('#input-email');
 const password = document.querySelector('#input-password');
 const reEnterPassword = document.querySelector('#input-re-enter-password');
 const btn = document.querySelector('#btn');
-
-
-
-// function formatField(field){
-//     return field.trim();
-// }   
 
 function textFieldValidate(element) {
     if (!isNaN(element.value|| element.value ==='')) {
@@ -51,6 +36,8 @@ btn.addEventListener('click', (e) => {
     localStorage.setItem('userInfo', JSON.stringify(userInfo));
     console.log(userInfo);
 });
+
+
 
 
 
