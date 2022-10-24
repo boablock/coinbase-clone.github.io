@@ -6,7 +6,7 @@ const formContainer = document.querySelector(".form-side");
 const containerAnswer = document.querySelector(".container-answer");
 
 
-const objBusqueda = { //-> el evento "change" seteara este objeto , evento que tiene asociada (se llamo) a la funcion getValue
+const objBusqueda = { //-> the "change" event will set the object.
     moneda: '',
     criptomoneda: '',
 }
@@ -14,8 +14,8 @@ const objBusqueda = { //-> el evento "change" seteara este objeto , evento que t
     consultarCriptos();
 
     form.addEventListener('submit', submitForm);
-    moneda.addEventListener('change', getValue); //-> the e.target.name of the getValue f(x) will be 'moneda'
-    criptomoneda.addEventListener('change', getValue);//-> e.target.name of the getValue f(x) will be 'criptomoneda', and the value will be the user selection: objBusqueda[e.target.name] = e.target.value;
+    moneda.addEventListener('change', getValue); //-> the e.target.name of getValue f(x) will be 'moneda'
+    criptomoneda.addEventListener('change', getValue);//-> e.target.name of getValue f(x) will be 'criptomoneda', and the value will be the user selection: objBusqueda[e.target.name] = e.target.value;
     
 function submitForm(e){
     e.preventDefault();
@@ -72,7 +72,7 @@ function showError(mensage){
     setTimeout(() => error.remove(), 3000);
 }
 
-function getValue(e){ //-> here you will get the value of the select where the function getValue is called. And then, both values (both selections, moneda y cryptomoneda) will be stored in the 'ObjBusqueda'.
+function getValue(e){ //-> here you will get the value of the select where the function getValue is called. And then, both values (both selections, moneda and cryptomoneda) will be stored in the 'ObjBusqueda'.
     objBusqueda[e.target.name] = e.target.value;
     console.log(e.target.name); 
 }
