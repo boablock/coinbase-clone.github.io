@@ -1,15 +1,12 @@
 
-
-
-
 const btnDisplayCoinList = document.querySelector('#btn-coin-list'); 
 const divCoinList= document.querySelector('#div-coin-list');
 const ulWatchList= document.querySelector('#ul-watch-list');
 
 // let watchList = JSON.parse(localStorage.getItem('watchlist')) || []; 
 let watchList = [];
-//-> la idea es que la variable watchList se cargue con lo que alla en el local storage. The idea is to download watchlist array with the info stored in the localStorage
-// || [] ->operador avanzado: si da null, se crear un array vacio. Si el LS con el getitem busca una key qeu no existe, devolvera null. Si esto, el array se cargaba de un null cuando el local storage estaba vacio. 
+//-> The idea is to download watchlist array with the info stored in the localStorage
+// || [] ->operador avanzado:  If the LS getitem looking for non.existent key, it will return null. if return null, it will create an empty array. namely, the array is loaded only if the local storage is empty. 
 
 btnDisplayCoinList.addEventListener('click', apiRequest);     
 
@@ -22,10 +19,7 @@ function apiRequest (){
             console.log(data.Data);
         }); 
 }
-
 // apiRequest();
-
-
 
 function createCoinList(data){  //--> do the same process with append child (you dont need the +=). With map to. 
     divCoinList.innerHTML="";
@@ -59,8 +53,6 @@ function createCoinList(data){  //--> do the same process with append child (you
     addCoinEvent(data);
 }
 
-
-
 function addCoinEvent(array){ //->  Array of ten objects, each with his CoinInfo.Id, DISPLAY.USD.MKTCP, etc. 
   array.forEach(coin=>{
     // const {Id} = coin.CoinInfo;
@@ -73,9 +65,6 @@ function addCoinEvent(array){ //->  Array of ten objects, each with his CoinInfo
    
     })
 }
-
-
-
 
 function addToWatchList(coin){
     let exist = watchList.some(productoSome => productoSome.CoinInfo.Id === coin.CoinInfo.Id); //-> .some retrun true or false, if the element is in the array or not. if there is a coindicence, it will return true, if not, false. Remember that you are recibing a coin throught the parameter 'coin' (where you called addToWatchList function).
@@ -95,8 +84,6 @@ function addToWatchList(coin){
     // localStorage.setItem('watchlist', JSON.stringify(watchList));
 }
 
-
-
 function watchListRendering(){
     ulWatchList.innerHTML =''; //->  clean the ul in each lap to not repeat the  watchlist renderization; with this, the previuos load doesnt persist
     watchList.forEach(coin=>{ //-> at this level, the watchList must have coins inside (you will called this function at this point, inside 'addToWAtchList' for example).
@@ -107,14 +94,10 @@ function watchListRendering(){
         ulWatchList.appendChild(li);
         
     })
-    // //6)
-  
+
     deleteCoin();
-    
 }
 
-
-//5)
 function deleteCoin(){
     watchList.forEach(coin =>{
         document.querySelector(`#btn-delete${coin.CoinInfo.Id}`).addEventListener('click',()=>{
